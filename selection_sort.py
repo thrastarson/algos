@@ -1,4 +1,4 @@
-from utils import switch, test_sorting
+from utils import swap, test_sorting
 
 def selection_sort(a):
     i = len(a) - 1
@@ -6,7 +6,7 @@ def selection_sort(a):
         j = i - 1
         while j >= 0:
             if a[j] > a[i]:
-                switch(a, j, i)
+                swap(a, j, i)
             j -= 1
         i -= 1
 

@@ -1,4 +1,4 @@
-from utils import test_sorting, switch
+from utils import test_sorting, swap
 
 def quicksort(a):
     a = list(a)
@@ -27,9 +27,9 @@ def partition(a, start, end):
         if right < left:
             done = True
         else:
-            switch(a, left, right)
+            swap(a, left, right)
     
-    switch(a, pivot, right)
+    swap(a, pivot, right)
     return right
 
 def main():

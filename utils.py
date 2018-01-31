@@ -1,7 +1,7 @@
 def is_sorted(a):
     return a == sorted(a)
 
-def switch(a, i, j):
+def swap(a, i, j):
     temp = a[i]
     a[i] = a[j]
     a[j] = temp
