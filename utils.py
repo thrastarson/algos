@@ -2,9 +2,7 @@ def is_sorted(a):
     return a == sorted(a)
 
 def swap(a, i, j):
-    temp = a[i]
-    a[i] = a[j]
-    a[j] = temp
+    a[i], a[j] = a[j], a[i]
 
 def test_sorting(sort_foo, returns_sorted=True):
     a = [5, 4, 7, 1, 3, 2, 8, 6, 9]
