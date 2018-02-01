@@ -104,6 +104,7 @@ def main():
 
     h.heapify(a)
     h.print_heap()
+
 if __name__ == '__main__':
     main()
 
