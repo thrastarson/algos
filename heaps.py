@@ -6,6 +6,14 @@ class MinHeap():
         self.heap = []
         self.size = 0
 
+    def heapify(self, a):
+        self.size = len(a)
+        self.heap = a
+        i = len(a) - 1
+        while i >= 0:
+            self._bubble_down(i)
+            i -= 1
+
     def peek(self):
         if self.size > 0:
             return self.heap[0]
@@ -87,13 +95,15 @@ def main():
     #test insertion to heap
     for x in a:
         h.insert(x, verbose=True)
-    
     h.print_heap()
     
     #test extraction from heap
     while h.peek():
         _ = h.extract_min(verbose=True)
+    h.print_heap()
 
+    h.heapify(a)
+    h.print_heap()
 if __name__ == '__main__':
     main()
 
