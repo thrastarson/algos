@@ -1,3 +1,8 @@
+import random
+
+def get_random_list(size=10)
+    return [random.randint(0, 100) for i in range(10)]
+
 def is_sorted(a):
     return a == sorted(a)
 

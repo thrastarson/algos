@@ -1,7 +1,6 @@
-import random
-from utils import swap
+from utils import swap, get_random_list
 
-class MinHeap():
+class MinHeap:
     def __init__(self):
         self.heap = []
         self.size = 0
@@ -89,7 +88,7 @@ class MinHeap():
             return None
 
 def main():
-    a = [random.randint(0, 100) for i in range(10)]
+    a = get_random_list()
     h = MinHeap()
      
     #test insertion to heap
