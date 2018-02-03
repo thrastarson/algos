@@ -1,4 +1,5 @@
 from utils import get_random_list
+from lists import LinkedList
 
 class SimpleHashTable:
     """
@@ -20,29 +21,44 @@ class SimpleHashTable:
         self.table[index] = val
 
     def print_table(self):
-        print('[ ', end='')
         for index in range(self.size):
             val = self.table[index]
             if val is None:
                 val = 'x'
 
-            if index == self.size - 1:
-                print(val, end='')
+            print('%3s: %s' % (index, val))
+
+class HashTable(SimpleHashTable):
+    def insert(self, val):
+        index = self._hash(val)
+        if self.table[index] is None:
+            _list = LinkedList()
+            self.table[index] = _list
+        self.table[index].insert(val)
+
+    def print_table(self):
+        for index in range(self.size):
+            _list = self.table[index]
+
+            if _list is None:
+                print('%3s: %s' % (index, 'x')) 
             else:
-                print(val, end=' | ')
-        print(' ]')
+                print('%3s: ' % index, end='')
+                _list.print_list()
 
 def main():
     a = get_random_list()
     print(a)
 
-    htable = SimpleHashTable()
-    for x in a:
-        index = htable._hash(x)
-        print('Inserting %3s at index %2s.' % (x, index))
-        htable.insert(x)
+    hash_classes = (SimpleHashTable, HashTable,)
+    for hash_class in hash_classes:
+        htable = hash_class()
+        for x in a:
+            index = htable._hash(x)
+            print('Inserting %3s at index %2s.' % (x, index))
+            htable.insert(x)
 
-    htable.print_table()
+        htable.print_table()
 
 if __name__ == '__main__':
     main()
