@@ -5,6 +5,11 @@ class Node:
         self.data = data
         self._next = None
 
+class DoubleNode(Node):
+    def __init(self, data):
+        super().__init__(data)
+        self.prev = None
+
 class LinkedList:
     def __init__(self):
         self.head = None
@@ -55,9 +60,6 @@ class LinkedList:
         This implementation of reverse manipulates the pointers
         in our list in one traversal.
         """
-        if self.is_empty():
-            return
-
         prev_node = None
         current_node = self.head
         while current_node is not None:
@@ -82,40 +84,88 @@ class LinkedList:
             reverse_list.insert(data)
         self.head = reverse_list.head
 
-    def print_list(self):
+    def print_list(self, token=' -> '):
         current_node = self.head
         while current_node is not None:
             if current_node._next is not None:
-                print(current_node.data, end=' -> ')
+                print(current_node.data, end=token)
             else:
                 print(current_node.data)
             current_node = current_node._next
 
+class DoubleLinkedList(LinkedList):
+    def insert(self, data):
+        node = DoubleNode(data)
+        
+        if not self.is_empty():
+            self.head.prev = node
+        
+        node._next = self.head
+        self.head = node
+
+    def delete(self, data):
+        if self.is_empty():
+            return
+
+        if self.head.data == data:
+            if self.head._next is not None:
+                self.head._next.prev = None
+            self.head = self.head._next
+            return
+
+        current_node = self.head
+        while current_node is not None:
+            if current_node.data == data:
+                
+                if current_node.prev is not None:
+                    current_node.prev._next = current_node._next
+                
+                if current_node._next is not None:
+                    current_node._next.prev = current_node.prev
+
+                break
+            else:
+                current_node = current_node._next
+      
+    def reverse(self):
+        current_node = self.head
+        while current_node is not None:
+            self.head = current_node
+            next_node = current_node._next
+            current_node._next = current_node.prev
+            current_node.prev = next_node
+            current_node = next_node
+
+    def print_list(self):
+        super().print_list(token=' <-> ')
+
 def main():
     a = get_random_list()
     print(a)
-    
-    _list = LinkedList()
-    for x in a:
-        _list.insert(x)
-    _list.print_list()
-
-    mid_element = a[len(a) // 2]
-    first_element = a[-1]
-    last_element = a[0]
-    test_elements = (mid_element, first_element, last_element)
-    for element in test_elements:
-        print('Deleting %s...' % element)
-        _list.delete(element)
-        _list.print_list()
    
-    print('Reversing list...')
-    _list.reverse2()
-    _list.print_list()
+    list_classes = (LinkedList, DoubleLinkedList)
+    for list_class in list_classes:
+        _list = list_class()
+        for x in a:
+            _list.insert(x)
+        _list.print_list()
 
-    print('Re-reversing the list...')
-    _list.reverse()
-    _list.print_list()
+        mid_element = a[len(a) // 2]
+        first_element = a[-1]
+        last_element = a[0]
+        test_elements = (mid_element, first_element, last_element)
+        for element in test_elements:
+            print('Deleting %s...' % element)
+            _list.delete(element)
+            _list.print_list()
+       
+        print('Reversing list...')
+        _list.reverse()
+        _list.print_list()
+
+        print('Re-reversing the list...')
+        _list.reverse2()
+        _list.print_list()
 
 if __name__ == '__main__':
     main()
