@@ -50,6 +50,38 @@ class LinkedList:
                 current_node = current_node._next
         return False
 
+    def reverse(self):
+        """
+        This implementation of reverse manipulates the pointers
+        in our list in one traversal.
+        """
+        if self.is_empty():
+            return
+
+        prev_node = None
+        current_node = self.head
+        while current_node is not None:
+            temp = current_node._next
+            current_node._next = prev_node
+            prev_node = current_node
+            current_node = temp
+        
+        self.head = prev_node
+
+    def reverse2(self):
+        """
+        This implementation of reverse creates a new list
+        and builds up a reverse version of our list by
+        repeatedly popping and deleting the head
+        before inserting to the new list.
+        """
+        reverse_list = LinkedList()
+        while not self.is_empty():
+            data = self.head.data
+            self.delete(data)
+            reverse_list.insert(data)
+        self.head = reverse_list.head
+
     def print_list(self):
         current_node = self.head
         while current_node is not None:
@@ -68,7 +100,6 @@ def main():
         _list.insert(x)
     _list.print_list()
 
-    
     mid_element = a[len(a) // 2]
     first_element = a[-1]
     last_element = a[0]
@@ -78,8 +109,13 @@ def main():
         _list.delete(element)
         _list.print_list()
    
+    print('Reversing list...')
+    _list.reverse2()
+    _list.print_list()
+
+    print('Re-reversing the list...')
+    _list.reverse()
+    _list.print_list()
+
 if __name__ == '__main__':
     main()
-
-
-    
