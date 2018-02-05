@@ -9,7 +9,7 @@ class SimpleHashTable:
     However, it is useful to subclass and overwrite with a better
     hash function and collision resistance.
     """
-    def __init__(self, size=20):
+    def __init__(self, size=23):
         self.table = [None for i in range(size)]
         self.size = size
 
