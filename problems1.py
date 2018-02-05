@@ -1,4 +1,4 @@
-from utils import sort_string
+from utils import sort_string, build_string
 
 #Problem 1.1
 #Implement an algorithm to determine if a string has all unique characters.
@@ -33,3 +33,30 @@ def is_unique2(w):
         i += 1
     return True
 
+#Problem 1.3
+#Write a method to replace all spaces in a string with '%20'. You may assume
+#the string has sufficient space at the end to hold additional characters,
+#and that you are given the true length of the string.
+def urlify(w, length):
+    """
+    First solution uses python built-in functions
+    in a simple one-liner.
+    """
+    return w.strip().replace(' ', '%20')
+
+def urlify2(w, length):
+    """
+    Second solution walks through the string once and detects words
+    and spaces, adding appropriate strings to a list. It then uses
+    a StringBuilder-like method to efficiently concatenate them.
+    Runs in O(n).
+    """
+    chars = []
+    while i < len(w):
+        c = w[i]
+        if c == ' ':
+            chars.append('%20')        
+        else:
+            chars.append(' ')
+    url_w = build_string(chars)
+    return url_w
