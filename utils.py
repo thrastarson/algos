@@ -1,5 +1,8 @@
 import random
 
+def sort_string(w):
+    return ''.join(sorted(w))
+
 def get_random_list(size=10):
     return [random.randint(0, 100) for i in range(10)]
 
