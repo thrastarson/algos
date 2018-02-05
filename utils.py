@@ -25,3 +25,16 @@ def test_sorting(sort_foo, returns_sorted=True):
             sort_foo(_list)
             print(is_sorted(_list), _list)
 
+def build_string(list_of_strings):
+    """
+    In some languages it can be handy to build a class,
+    commonly called StringBuilder, to mitigate the time
+    complexity of concatenating multiple strings.
+    In many languages, including python, a str3 = str1 + str2
+    operation copies str1 and str2 into a new string str3.
+    This can quickly become expansive if done with little though.
+    A workaround in Python is so elegant that a whole
+    StringBuilder class is pretty unnecessary.
+    It is implemented here as an exercise.
+    """
+    return ''.join(list_of_strings)
