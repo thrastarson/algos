@@ -107,3 +107,88 @@ def urlify2(w, length):
             chars.append(' ')
     url_w = build_string(chars)
     return url_w
+
+#Problem 1.4
+#Given a string, write a function to check if it is a permutation
+#of a palindrome. A palindrome is a word or phrase that is the same
+#backwards and forwards. A permutation is a rearrangement of letters.
+#The palindrome does not need to be limited to just dictionary words.
+def palindrome_permutation(w):
+    """
+    This solution counts how often each distinct character appears
+    in w. Checking for a possible palindrome then proceeds in two
+    slightly different cases, depending on whether w is of even
+    or odd length.
+    """
+    w = w.strip().replace(' ', '')
+    chars = {}
+    for c in w:
+        try:
+            chars[c] += 1
+        except KeyError:
+            chars[c] = 1
+
+    if len(w) % 2 == 0:
+        #Check if there is an even number
+        #of every character in w.
+        return all(x % 2 == 0 for x in chars.values()) 
+    else:
+        #Check if there is an even number
+        #of every character in w,
+        #except for exactly one character.
+        found_odd = False
+        for c in chars:
+            if chars[c] % 1 == 0:
+                if not found_odd:
+                    found_odd = True
+                else:
+                    return False
+        
+        if found_odd:
+            return True
+        else:
+            return False
+
+                
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
