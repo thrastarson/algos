@@ -188,44 +188,75 @@ def one_away(u, v):
                     i += 1
     return True
                 
-                     
+#Problem 1.6
+#Implement a method to perform basic string compression using
+#the counts of repeated characters. For example, the string
+#aabcccccaaa would become a2b1c5a3. If the compressed string
+#would not become smaller than the original string, your method
+#should return the original string. You can assume the string
+#has only uppercase and lowercase letters (a-z).
+def string_compression(w):
+    """
+    This solution runs in O(n).
+    """
+    if len(w) <= 1:
+        return w
 
+    substrings = []
+    prev_char = w[0]
+    char_count = 1
+    for char in w[1:]:
+        if prev_char == char:
+            char_count += 1
+        else:
+            substrings.append('%s%s' % (prev_char, char_count))
+            char_count = 1
+            prev_char = char
 
+    substrings.append('%s%s' % (prev_char, char_count))
 
+    compression = ''.join(substrings)
+    if len(compression) < len(w):
+        return compression
+    else:
+        return w
 
+#Problem 1.7
+#Given an image represented by an NxN matrix, where each pixel
+#in the image is 4 bytes, write a mehtod to rotate the image
+#by 90 degrees. Can you do this in place?
+def rotate_matrix(matrix):
+    """
+    This solution works by working on the square matrix
+    from the outside in, switching one row with the row
+    to its right until a full circle is done, then proceeds
+    to do the same with its inner circle.
+    This solution runs in O(n^2).
+    """
+    
+    n = len(matrix)
+    if n == 0 or len(matrix[0]) != n:
+        return False
 
+    for layer in range(n // 2):
+        first = layer
+        last = n - 1 - layer
+        for i in range(first, last):
+            offset = i - first
+            
+            #save top
+            top = matrix[first][i]
 
+            # left -> top
+            matrix[first][i] = matrix[last-offset][first]
 
+            #bottom -> left
+            matrix[last-offset][first] = matrix[last][last-offset]
 
+            #right -> bottom
+            matrix[last][last-offset] = matrix[i][last]
 
+            #top -> right
+            matrix[i][last] = top
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    return True
