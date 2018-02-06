@@ -260,3 +260,55 @@ def rotate_matrix(matrix):
             matrix[i][last] = top
 
     return True
+
+#Problem 1.8
+#Write an algorithm such that if an element in an MxN matrix is 0, 
+#its entire row and column are set to 0.
+def zero_matrix(matrix):
+    """
+    This solution runs in O(n^2) because it necessarily must look
+    at every element in the matrix.
+    """
+    n = len(matrix)
+    if n == 0:
+        return True
+
+    m = len(matrix[0])
+    if m == 0:
+        return True
+
+    zero_rows = set()
+    zero_columns = set()
+    for i in range(n):
+        for j in range(m):
+            if matrix[i][j] == 0:
+                zero_rows.add(i)
+                zero_columns.add(j)
+    
+    for i in zero_rows:
+        for j in range(m):
+            matrix[i][j] = 0
+
+    for i in range(n):
+        for j in zero_columns:
+            matrix[i][j] = 0
+
+    return True
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
