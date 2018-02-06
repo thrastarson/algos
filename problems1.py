@@ -1,3 +1,4 @@
+import itertools
 from utils import sort_string, build_string
 
 #Problem 1.1
@@ -31,6 +32,49 @@ def is_unique2(w):
         if w_sorted[i] == w_sorted[j]:
             return False
         i += 1
+    return True
+
+#Problem 1.2
+#Given two strings, write a method to decide if one is a permutiation
+#of the other.
+def check_permutation(u, v):
+    """
+    First solution uses a handy function from the itertools library.
+    Runs in O(n!) worst-case time.
+    """
+    for permutation in itertools.permutations(v):
+        if v == permutation:
+            return True
+    return False
+
+def check_permutation2(u, v):
+    """
+
+    """
+    u_chars = {}
+    for c in u:
+        try:
+            u_chars[c] += 1
+        except KeyError:
+            u_chars[c] = 1
+
+    v_chars = {}
+    for d in v:
+        try:
+            v_chars[d] += 1
+        except KeyError:
+            v_chars[d] = 1
+
+    if sum(u_chars.values()) != sum(v_chars.values()):
+        #u and v are not of the same length.
+        return False
+
+    for c in u:
+        c_count_in_u = u_chars[c]
+        c_count_in_v = v_chars.get(c, 0)
+        if c_count_in_u != c_count_in_v:
+            return False
+
     return True
 
 #Problem 1.3
