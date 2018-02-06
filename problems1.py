@@ -149,9 +149,46 @@ def palindrome_permutation(w):
         else:
             return False
 
-                
-        
+#Problem 1.5
+#There are three types of edits that can be performed on strings:
+#remove a character, or replace a character. Given two strings,
+#write a function to check if they are one edit (or zero edits) away.
+def one_away(u, v):
+    if u == v:
+        return True
 
+    if abs(len(u) - len(v)) > 1:
+        return False
+
+    if len(u) < len(v):
+        temp = v
+        v = u
+        u = temp
+
+    found_edit = False
+    i = 0
+    j = 0
+    while i < len(u) and j < len(v):
+        if u[i] == v[j]:
+            i += 1
+            j += 1
+        else:
+            if len(u) == len(v):
+                if found_edit:
+                    return False
+                else:
+                    found_edit = True
+                    i += 1
+                    j += 1
+            else:
+                if found_edit:
+                    return False
+                else:
+                    found_edit = True
+                    i += 1
+    return True
+                
+                     
 
 
 
