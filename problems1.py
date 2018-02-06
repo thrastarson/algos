@@ -49,7 +49,10 @@ def check_permutation(u, v):
 
 def check_permutation2(u, v):
     """
-
+    Second solution walks through both u and v and builds a dict
+    of distinct characters and their counts for each. 
+    It then compares the counts of characters between them.
+    Runs in O(max(n, m)) where n = len(u) and m = len(v).
     """
     u_chars = {}
     for c in u:
