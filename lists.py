@@ -35,6 +35,11 @@ class LinkedList:
             else:
                 current_node = current_node._next
 
+    def get_first(self):
+        first_node = self.head
+        self.head = self.head._next
+        return first_node
+
     def is_empty(self):
         return self.head is None
 
@@ -126,7 +131,13 @@ class DoubleLinkedList(LinkedList):
                 break
             else:
                 current_node = current_node._next
-      
+    
+    def get_first(self):
+        first_node = self.head
+        self.head = self.head._next
+        self.head.prev = None
+        return first_node
+
     def reverse(self):
         current_node = self.head
         while current_node is not None:
