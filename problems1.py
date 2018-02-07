@@ -1,6 +1,9 @@
 import itertools
 from utils import sort_string, build_string
 
+#The following problems are from the book Cracking the Coding Interview
+#by Gayle Laakmann McDowell. I reserve no rights for them.
+
 #Problem 1.1
 #Implement an algorithm to determine if a string has all unique characters.
 #What if you cannot use an external data structure?

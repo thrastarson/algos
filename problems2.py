@@ -1,5 +1,8 @@
 from lists import LinkedList
 
+#The following problems are from the book Cracking the Coding Interview
+#by Gayle Laakmann McDowell. I reserve no rights for them.
+
 #Problem 2.1
 #Write code to remove duplicates from an unsorted linked list.
 #Follow up: How would you solve this problem if a temporary buffer
