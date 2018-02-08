@@ -19,6 +19,11 @@ class LinkedList:
         node._next = self.head
         self.head = node
 
+    def build_from_collection(self, a):
+        a = list(a)
+        while len(a) > 0:
+            self.insert(a.pop())
+
     def delete(self, data):
         if self.is_empty():
             return

@@ -82,9 +82,7 @@ def test_weave():
     print(a)
     
     li = LinkedList()
-    while len(a) > 0:
-        li.insert(a.pop())
-
+    li.build_from_collection(a)
     li.print_list()
     weave(li)
     li.print_list()
@@ -126,9 +124,7 @@ def test_delete_middle_node():
     a = ['a', 'b', 'c', 'd', 'e', 'f']
     
     li = LinkedList()
-    while len(a) > 0:
-        li.insert(a.pop())
-
+    li.build_from_collection(a)
     li.print_list()
     middle_node = kth_to_last(li, 3)
     delete_middle_node(middle_node)
@@ -165,9 +161,7 @@ def test_partition():
     a = [3, 5, 8, 5, 10, 2, 1]
 
     li = LinkedList()
-    while len(a) > 0:
-        li.insert(a.pop())
-    
+    li.build_from_collection(a) 
     li.print_list()
     partition(li, 5)
     li.print_list()
