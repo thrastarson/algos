@@ -165,3 +165,76 @@ def test_partition():
     li.print_list()
     partition(li, 5)
     li.print_list()
+
+#Problem 2.5
+#You have two numbers represented by a linked list, where each node contains
+#a single digit. The digits are stored in reverse order, such that the 1's
+#digit is at the head of the list. Write a function that adds the two numbers
+#and returns the sum as a linked list.
+#Example:
+#Input: (7 -> 1 -> 6) + (5 -> 9 -> 2). That is, 617 + 295.
+#Output: 2 -> 1 -> 9. That is 912.
+def sum_lists(a, b):
+    a_num = 0
+    a_mult = 1
+    a_curr = a.head
+    while a_curr is not None:
+        a_num += a_curr.data * a_mult
+        a_curr = a_curr._next
+        a_mult *= 10
+
+    b_num = 0
+    b_mult = 1
+    b_curr = b.head
+    while b_curr is not None:
+        b_num += b_curr.data * b_mult
+        b_curr = b_curr._next
+        b_mult *= 10
+
+    output_num = a_num + b_num
+    print(output_num)
+    output_mult = 1
+    while output_num // (output_mult * 10) > 0:
+        output_mult *= 10
+
+    output = LinkedList()
+    if output_num == 0:
+        output.insert(0)
+        return output
+
+    while output_num != 0:
+        digit = int(output_num // output_mult)
+        output.insert(digit)
+        output_num = output_num - (digit * output_mult)
+        output_mult /= 10
+    
+    return output
+
+def test_sum_lists(num_a, num_b):
+    a = LinkedList()
+    a_str = str(num_a)
+    for digit in a_str:
+        a.insert(int(digit))
+
+    b = LinkedList()
+    b_str = str(num_b)
+    for digit in b_str:
+        b.insert(int(digit))
+
+    a.print_list()
+    b.print_list()
+
+    result = sum_lists(a, b)
+    result.print_list()
+
+#Follow up: Suppose the digits are stored in forward order.
+#Repeat the above problem.
+#Example:
+#Input: (6 -> 1 -> 7) + (2 -> 9 -> 5). That is 617 + 295.
+#Output: 9 -> 1 -> 2. That is 912.
+#Solution: We'd solve this problem much the same way as above,
+#          only this change requires us to scan both input number
+#          once through to count the number of elements in the list.
+#          Then we set mult = 10^(count-1), before proceeding
+#          like before. Creating the output list would simply
+#          be done in reverse order.
