@@ -47,6 +47,9 @@ def remove_dups2(_list):
 #The length of the list is unknown, but it can be assumed to be of even length.
 #Re-arrange the list like so a1 -> b1 -> a2 -> b2 -> ... -> an -> bn.
 def weave(li):
+    """
+    This solution runs in O(n) time.
+    """
     front = li.head
     back = li.head._next
     while back._next is not None:
@@ -85,3 +88,20 @@ def test_weave():
     li.print_list()
     weave(li)
     li.print_list()
+
+#Problem 2.2
+#Implement an algorithm to find the kth to last element in a singly linked list.
+def kth_to_last(ls, k):
+    """
+    This solution runs in O(n) time.
+    """
+    if ls.is_empty():
+        return False
+
+    curr = ls._head
+    count = 1
+    while curr is not None:
+        if count == k:
+            return curr
+        curr = curr._next
+    return False
