@@ -133,3 +133,41 @@ def test_delete_middle_node():
     middle_node = kth_to_last(li, 3)
     delete_middle_node(middle_node)
     li.print_list()
+
+#Problem 2.4
+#Write code to partition a linked list around a value x, such that all nodes
+#less than x come before all nodes greater than or equal to x. If x is contained
+#with in the list, the values of x only need to be after the elements less than x.
+#The partition element x can appear anywhere in the 'right partition';
+#it does not need to appear between the left and right partitions.
+#Example:
+#Input:   3 -> 5 -> 8 -> 5 -> 10 -> 2 -> 1  [partition = 5]
+#Output:  3 -> 1 -> 2 -> 10 -> 5 -> 5 -> 8
+def partition(li, p):
+    prev = None
+    curr = li.head
+    while curr._next is not None:
+        if curr._next.data < p:
+            #Move curr._next to the head of the list.
+            temp = curr._next._next
+            curr._next._next = li.head
+            li.head = curr._next
+            curr._next = temp
+        prev = curr
+        curr = curr._next
+
+    if curr.data < p:
+        prev._next = None
+        curr._next = li.head
+        li.head = curr
+
+def test_partition():
+    a = [3, 5, 8, 5, 10, 2, 1]
+
+    li = LinkedList()
+    while len(a) > 0:
+        li.insert(a.pop())
+    
+    li.print_list()
+    partition(li, 5)
+    li.print_list()
