@@ -41,3 +41,47 @@ def remove_dups2(_list):
                 runner._next = runner._next._next
             runner = runner._next
         curr = curr._next
+
+#Extra problem.
+#You get a linked list a1 -> a2 -> a3 -> an -> ... -> b1 -> b2 -> b3 ... -> bn.
+#The length of the list is unknown, but it can be assumed to be of even length.
+#Re-arrange the list like so a1 -> b1 -> a2 -> b2 -> ... -> an -> bn.
+def weave(li):
+    front = li.head
+    back = li.head._next
+    while back._next is not None:
+        front = front._next
+        back = back._next._next
+
+    #now front = an, back = bn
+    
+    a = li.head
+    b = front._next
+    while a is not None and b is not None:
+        
+        if b._next is None:
+            #We are finished weaving, but must fix a._next pointer
+            #or else it will cause an infinite loop.
+            a._next = b
+            break
+
+        next_a = a._next
+        next_b = b._next
+
+        a._next = b
+        b._next = next_a
+
+        a = next_a
+        b = next_b
+
+def test_weave():
+    a = ['a1', 'a2', 'a3', 'a4', 'b1', 'b2', 'b3', 'b4'] 
+    print(a)
+    
+    li = LinkedList()
+    while len(a) > 0:
+        li.insert(a.pop())
+
+    li.print_list()
+    weave(li)
+    li.print_list()
