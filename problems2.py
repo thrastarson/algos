@@ -91,17 +91,45 @@ def test_weave():
 
 #Problem 2.2
 #Implement an algorithm to find the kth to last element in a singly linked list.
-def kth_to_last(ls, k):
+def kth_to_last(li, k):
     """
     This solution runs in O(n) time.
     """
-    if ls.is_empty():
+    if li.is_empty():
         return False
 
-    curr = ls._head
+    curr = li.head
     count = 1
     while curr is not None:
         if count == k:
             return curr
         curr = curr._next
+        count += 1
     return False
+
+#Problem 2.3
+#Implement an algorithm to delete the node in the middle (i.e. any node but the
+#first and last node, not necessarily the exact middle) of a singly linked list,
+#given only access to that node.
+#Example: Input the node c from the linked list a -> b -> c -> d -> e -> f.
+#Result: nothing is returned, 
+#but the new linked list looks like a -> b -> d -> e -> f.
+def delete_middle_node(node):
+    prev = None
+    while node._next is not None:
+        node.data = node._next.data
+        prev = node
+        node = node._next
+    prev._next = None
+
+def test_delete_middle_node():
+    a = ['a', 'b', 'c', 'd', 'e', 'f']
+    
+    li = LinkedList()
+    while len(a) > 0:
+        li.insert(a.pop())
+
+    li.print_list()
+    middle_node = kth_to_last(li, 3)
+    delete_middle_node(middle_node)
+    li.print_list()
