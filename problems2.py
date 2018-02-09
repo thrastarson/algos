@@ -296,3 +296,25 @@ def test_palindrome():
 #based on reference, not value. That is, if the kth node of the first
 #linked list, is the exact same node (by reference) as the jth node
 #of the second linked list, then they are intersecting.
+def intersection(a, b):
+    """
+    This solution runs in o(A + B) time and uses
+    O(N) memory where N = max(A, B) for the seen
+    hash table.
+    """
+    seen = {}
+    curr = a.head
+    while curr is not None:
+        seen[curr] = 1
+        curr = curr._next
+
+    curr = b.head
+    while curr is not None:
+        try:
+            int_node = seen[curr]
+        except KeyError:
+            curr = curr._next
+        else:
+            return int_node
+
+    return None
