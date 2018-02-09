@@ -238,3 +238,61 @@ def test_sum_lists(num_a, num_b):
 #          Then we set mult = 10^(count-1), before proceeding
 #          like before. Creating the output list would simply
 #          be done in reverse order.
+
+
+#Problem 2.6
+#Implement a function to check if a linked list is a palindrome.
+def is_a_palindrome(li):
+    """
+    This solution relies on the fact that the linked list
+    implementation inserts nodes at the head of the list.
+    It first scans the list to count the number of elements.
+    Then we pop off the first half of the list while inserting
+    into a new list. This will reverse the elements in a stack-like
+    manner. If the original list contains an odd number
+    of elements we discard the middle element. Finally, we
+    check to see if the two lists we're left with match.
+    This solution destroyes the original list, we could
+    easily add a step to copy it into a new list first to avoid
+    destroying it.
+    """
+    n = 0
+    curr = li.head
+    while curr is not None:
+        n += 1
+        curr = curr._next
+    
+    li2 = LinkedList()
+    k = n // 2
+    while k > 0:
+        popped_node = li.get_first()
+        li2.insert(popped_node.data)
+        k -= 1
+
+    if n % 2 == 1:
+        #Remove the middle element and discard it.
+        _ = li.get_first()
+
+    while not li2.is_empty():
+        li2_el = li2.get_first()
+        li_el = li.get_first()
+        if li2_el.data != li_el.data:
+            return False
+
+    return True
+
+def test_palindrome():
+    a = ['aabbaa', 'catac', 'ababab']
+    for x in a:
+        print(x)
+        li = LinkedList()
+        li.build_from_collection(x)
+        li.print_list()
+        print('Is a palindrome:', is_a_palindrome(li))
+
+#Problem 2.7
+#Given two (singly) linked lists, determine if the two lists intersect.
+#Return the intersecting node. Note that the intersection is defined
+#based on reference, not value. That is, if the kth node of the first
+#linked list, is the exact same node (by reference) as the jth node
+#of the second linked list, then they are intersecting.
