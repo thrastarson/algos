@@ -298,7 +298,7 @@ def test_palindrome():
 #of the second linked list, then they are intersecting.
 def intersection(a, b):
     """
-    This solution runs in o(A + B) time and uses
+    This solution runs in O(A + B) time and uses
     O(N) memory where N = max(A, B) for the seen
     hash table.
     """
@@ -318,3 +318,64 @@ def intersection(a, b):
             return int_node
 
     return None
+
+#Problem 2.8
+#Given a circular linked list, implement an algorithm that returns
+#the node at the beginning of the loop.
+#Definition:
+#Circular linked list: A (corrupt) linked list in which a node's
+#next pointer points to an earlier node, so as to make a loop
+#in the linked list.
+#Example:
+#Input:  A -> B -> C -> D -> E -> C (the same C as earlier)
+#Output: C
+def loop_detection(li):
+    popped_node = None
+    while has_loop(li):
+        popped_node = li.get_first()
+        popped_node._next = None
+    return popped_node
+
+def has_loop(li):
+    if li.is_empty():
+        return False
+
+    if li.head._next is None or li.head._next._next is None:
+        return False
+    
+    curr = li.head
+    even_runner = li.head._next
+    odd_runner = even_runner._next
+    while curr is not None:
+        if curr == odd_runner or curr == even_runner:
+            return True
+        else:
+            curr = curr._next
+            try:
+                odd_runner = odd_runner._next._next
+                even_runner = even_runner._next._next
+            except AttributeError:
+                #We can only reach a NULL pointer if
+                #list contains no cycles.
+                return False
+    return False
+
+def test_loop_detection():
+    li = LinkedList()
+    li.insert('C')
+    li.insert('E')
+    li.insert('D')
+
+    c_node = li.head._next._next
+    c_node._next = li.head
+    li.head = c_node
+    #Oops now we have a loop.
+
+    li.insert('B')
+    li.insert('A')
+
+    loop_node = loop_detection(li)
+    if loop_node is not None:
+        print('Has loop at node %s.' % loop_node.data)
+    else:
+        print('Contains no loop.')
