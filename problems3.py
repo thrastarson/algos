@@ -1,6 +1,9 @@
 from stacks import Stack
 from utils import swap
 
+#The following problems are from the book Cracking the Coding Interview
+#by Gayle Laakmann McDowell. I reserve no rights for them.
+
 #Problem 3.1
 #Describe how you could use a single array to implement three stacks.
 class ThreeStack:
