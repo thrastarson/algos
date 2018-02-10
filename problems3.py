@@ -1,3 +1,4 @@
+from stacks import Stack
 from utils import swap
 
 #Problem 3.1
@@ -79,3 +80,36 @@ class ThreeStack:
 
     def third_is_empty(self):
         return self.third_size == 0
+
+#Problem 3.2
+#How would you design a stack which, in addition to push and pop,
+#has a function min which returns the minimum element?
+#Push, pop, and min should all operate in O(1) time.
+class MinStack(Stack):
+    def __init__(self):
+        super().__init__()
+        self.min_idx = None
+
+    def push(self, data):
+        if self.is_empty():
+            self.min_idx = 0
+
+        min_val = self.get_min_val()
+        if data < min_val:
+            self.min_idx = len(self._list)
+
+        super().push(data)
+
+    def pop():
+        min_val = self.get_min_val()
+        data = super().pop()
+        if data == min_val:
+            self._find_new_min() 
+        return data
+
+    def get_min_value(self):
+        return self._list[min_idx]
+
+    def _find_new_min(self):
+        min_val = min(self._list)
+        self.min_idx = self._list.index(min_val)
