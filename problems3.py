@@ -116,3 +116,61 @@ class MinStack(Stack):
     def _find_new_min(self):
         min_val = min(self._list)
         self.min_idx = self._list.index(min_val)
+
+#Problem 3.3
+#Imagine a (literal) stack of plates. If the stack gets too high, it might topple.
+#Therefore, in real life, we would likely start a new stack when the previous stack
+#exceeds some threshold. Implement a data structure SetOfStacks that mimics this.
+#SetOfStacks should be composed of several stacks and should create a new stack
+#once the previous one exceeds capacity. SetOfStacks.push() and SetOfStacks.pop()
+#should behave identically to a single stack (that is, pop() should return the same
+#values as it would if there were just a single stack).
+#Follow up:
+#Implement a function popAt(int index) which performs a pop operation on a specific
+#sub-stack.
+class SetOfStacks:
+    def __init__(self, limit=10):
+        self.stacks = [Stack()]
+        self.limit = limit
+        self.current_stack = 0
+
+    def push(self, data):
+        current_size = self._get_current_size():
+        if current_size >= self.limit:
+            self._add_new_stack()
+        
+        current_stack = self._get_current_stack()
+        current_stack.push(data)
+
+    def pop(self):
+        current_size = self._get_current_size()
+        if current_size == 0:
+            self._remove_stack()    
+        current_stack = self.get_current_stack()
+        if not current_stack.is_empty():
+            return current_stack.pop()
+        else:
+            return None
+
+    def pop_at(self, index):
+        if index > self.current_stack:
+            return None
+        else:
+            stack = self.stacks[index]
+            return stack.pop()
+
+    def _remove_stack(self):
+        _ = self.stacks.pop()
+        if self.current_stack > 0:
+            self.current_stack -= 1
+
+    def _add_new_stack(self):
+        self.stacks.append(Stack())
+        self.current_stack += 1
+
+    def _get_current_stack():
+        return self.stacks[current_stack]
+
+    def _get_current_size():
+        current_stack = self._get_current_stack():
+        return len(current_stack)
