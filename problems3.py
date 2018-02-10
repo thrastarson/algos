@@ -193,7 +193,56 @@ def test_set_of_stacks():
     for i in range(5):
         _ = stacks.pop()
     stacks.print_stacks() 
-    
+
+#Problems 3.4
+#Implement a MyQueue class which implements a queue using two stacks.
+class MyStackQueue:
+    def __init__(self, data):
+        self.in_stack = Stack()
+        self.out_stack = Stack()
+        self.first = None
+        self.last = None
+
+    def add(self, data):
+        self.in_stack.push(data)
+
+    def remove(self):
+        if not self.out_stack.is_empty():
+            return self.out_stack.pop()
+        
+        self._shift_between_stacks()
+
+        if not self.out_stack.is_empty():
+            return self.out_stack.pop()
+        else:
+            return None
+
+    def peek(self):
+        if not self.out_stack.is_empty():
+            return self.out_stack.peek()
+        
+        self._shift_between_stacks()
+
+        if not self.out_stack.is_empty():
+            return self.out_stack.peek()
+        else:
+            return None
+
+    def is_empty(self):
+        return self.out_stack.is_empty() and self.in_stack.is_empty()
+        
+    def _shift_between_stacks(self):
+        #Move all elements from in_stack to out_stack,
+        #then pop from out_stack.
+        while not self.in_stack.is_empty():
+            self.out_stack.push(self.in_stack.pop())
+
+
+
+
+
+
+
 
 
 
