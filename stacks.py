@@ -18,6 +18,12 @@ class Stack:
     def size(self):
         return len(self._list)
 
+    def peek(self):
+        if not self.is_empty():
+            return self._list[-1]
+        else:
+            return None
+
     def print_stack(self):
         print(self._list)
 
