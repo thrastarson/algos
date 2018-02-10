@@ -1,5 +1,5 @@
 from stacks import Stack
-from utils import swap
+from utils import swap, get_random_list
 
 #The following problems are from the book Cracking the Coding Interview
 #by Gayle Laakmann McDowell. I reserve no rights for them.
@@ -135,7 +135,7 @@ class SetOfStacks:
         self.current_stack = 0
 
     def push(self, data):
-        current_size = self._get_current_size():
+        current_size = self._get_current_size()
         if current_size >= self.limit:
             self._add_new_stack()
         
@@ -146,7 +146,7 @@ class SetOfStacks:
         current_size = self._get_current_size()
         if current_size == 0:
             self._remove_stack()    
-        current_stack = self.get_current_stack()
+        current_stack = self._get_current_stack()
         if not current_stack.is_empty():
             return current_stack.pop()
         else:
@@ -168,9 +168,36 @@ class SetOfStacks:
         self.stacks.append(Stack())
         self.current_stack += 1
 
-    def _get_current_stack():
-        return self.stacks[current_stack]
+    def _get_current_stack(self):
+        return self.stacks[self.current_stack]
 
-    def _get_current_size():
-        current_stack = self._get_current_stack():
-        return len(current_stack)
+    def _get_current_size(self):
+        current_stack = self._get_current_stack()
+        return current_stack.size()
+
+    def print_stacks(self):
+        for i, stack in enumerate(self.stacks[::-1]):
+            print('SubStack %s:' % str(i + 1))
+            stack.print_stack()
+
+def test_set_of_stacks():
+    a = get_random_list(13)
+    print(a)
+
+    stacks = SetOfStacks(limit=5)
+    for x in a:
+        stacks.push(x)
+    stacks.print_stacks()
+
+    print('Popping 5 values...')
+    for i in range(5):
+        _ = stacks.pop()
+    stacks.print_stacks() 
+    
+
+
+
+
+
+
+
