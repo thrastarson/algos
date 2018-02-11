@@ -25,15 +25,15 @@ def bst_insert(root, node):
             else:
                 return bst_insert(root.right, node)
 
-def inorder_traversal(node, foo):
+def inorder_traversal(node, visit):
     if node is not None:
         inorder_traversal(node.left, foo)
-        foo(node)
+        visit(node)
         inorder_traversal(node.right, foo)
 
 def preorder_traversal(node, foo):
     if node is not None:
-        foo(node)
+        visit(node)
         preorder_traversal(node.left, foo)
         preorder_traversal(node.right, foo)
 
@@ -41,4 +41,4 @@ def postorder_traversal(node, foo):
     if node is not None:
         postorder_traversal(node.left, foo)
         postorder_traversal(node.right, foo)
-        foo(node)
+        visit(node)
