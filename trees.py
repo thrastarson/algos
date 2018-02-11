@@ -1,4 +1,10 @@
-class Node:
+class TrieNode:
+    def __init__(self, label=None, alphabet='abcdefghijklmnopqrstuvwxyz')
+        self.label = label
+        self.children = {x: None for x in alphabet}
+        self.terminating = True
+
+class BinaryTreeNode:
     def __init__(self, data=None):
         self.data = data
         self.left = None
