@@ -1,0 +1,38 @@
+class Node:
+    def __init__(self, data=None):
+        self.data = data
+        self.left = None
+        self.right = None
+
+def bst_insert(root, node):
+    if root is None:
+        root = None
+    else:
+        if data <= root.data:
+            if root.left is None:
+                root.left = node
+            else:
+                return bst_insert(root.left, node)
+        else:
+            if root.right is None:
+                root.right = node
+            else:
+                return bst_insert(root.right, node)
+
+def inorder_traversal(node, foo):
+    if node is not None:
+        inorder_traversal(node.left, foo)
+        foo(node)
+        inorder_traversal(node.right, foo)
+
+def preorder_traversal(node, foo):
+    if node is not None:
+        foo(node)
+        preorder_traversal(node.left, foo)
+        preorder_traversal(node.right, foo)
+
+def postorder_traversal(node, foo):
+    if node is not None:
+        postorder_traversal(node.left, foo)
+        postorder_traversal(node.right, foo)
+        foo(node)
