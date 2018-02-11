@@ -1,4 +1,5 @@
 from stacks import Stack
+from queues import MyQueue
 from utils import swap, get_random_list
 
 #The following problems are from the book Cracking the Coding Interview
@@ -268,3 +269,37 @@ def test_sort_stack():
     stack.print_stack()
     sort_stack(stack)
     stack.print_stack()
+
+#Problem 3.6
+#An animal shelter, which holds only dogs and cats, operates on a strictly
+#'first in, first out' basis. People must adopt either the 'oldest'
+#(based on arrival time) of all animals in the shelter, or they can select
+#whether they would prefer a dog or a cat (and will receive the oldest animal
+#of that type). They cannot select which specific animal they would like.
+#Create the data structures to maintain this system and implement operations
+#such as enqueue, dequeueAny, dequeueDog, and dequeueCat. You may use
+#the built-in LinkedList data structure.
+class AnimalShelter:
+    def __init__(self):
+        self.dog_queue = MyQueue()
+        self.cat_queue = MyQueue()
+        self.order = 0
+
+    def enqueue(self, animal):
+        self.order += 1
+        if animal == 'dog':
+            self.dog_queue.add(order)
+        elif animal == 'cat':
+            self.cat_queue.add(order)
+
+    def dequeueDog(self):
+        return self.dog_queue.remove()
+
+    def dequeueCat(self):
+        return self.cat_queue.remove()
+
+    def dequeueAny(self):
+        if self.cat_queue.peek() < self.dog_queue.peek():
+            return self.cat_queue.remove()
+        else:
+            return self.dog_queue.remove()
