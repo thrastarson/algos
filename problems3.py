@@ -237,16 +237,34 @@ class MyStackQueue:
         while not self.in_stack.is_empty():
             self.out_stack.push(self.in_stack.pop())
 
+#Problems 3.5
+#Write a program to sort a stack such as the smallest items are on top.
+#You can use an additional temporary stack but you may not copy th
+#elements into any other data structure (such as an array).
+#The stack supports the following operations (push, pop, peek, and is_empty).
+def sort_stack(stack):
+    if stack.is_empty():
+        return stack
 
+    temp = Stack()
+    while not stack.is_empty():
+        if temp.is_empty():
+            temp.push(stack.pop())
+        else:
+            val = stack.pop()
+            while not temp.is_empty() and temp.peek() > val:
+                stack.push(temp.pop())
+            temp.push(val)
 
+    while not temp.is_empty():
+        stack.push(temp.pop())
 
+def test_sort_stack():
+    a = get_random_list(5)
+    stack = Stack()
+    for x in a:
+        stack.push(x)
 
-
-
-
-
-
-
-
-
-
+    stack.print_stack()
+    sort_stack(stack)
+    stack.print_stack()
