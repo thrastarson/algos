@@ -10,6 +10,12 @@ class BinaryTreeNode:
         self.left = None
         self.right = None
 
+    def __repr__(self):
+        return str(self.data)
+
+    def __str__(self):
+        return str(self.data)
+
 def bst_insert(root, node):
     if root is None:
         root = None
