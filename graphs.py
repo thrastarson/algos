@@ -19,7 +19,7 @@ class GraphNode:
         return 'GraphNode(%s)' % self.val
 
     def __str__(self):
-        return '%3s' % str(self.val)
+        return '%3s -> %s' % (str(self.val), self.adjacent)
 
 class Graph:
     #Implements a graph using adjacency lists.
@@ -69,6 +69,9 @@ def bf_search(root, visit):
                 q.add(adjacent_node)
 
 
+def is_same_node(s, t):
+    return s is t
+
 class MatrixGraph:
     #Implements a graph using an adjacency matrix.
     def __init__(self, size=10):
@@ -76,26 +79,10 @@ class MatrixGraph:
         self.matrix = [[False for x in range(n)] for y in range(n)]
 
 def main():
-    a = get_random_list()
-    
-    g = Graph()
-    for x in a:
-        node = GraphNode(val=x)
-        g.add(node)
-
-    nodes = g.get_nodes()
-    for i, node in enumerate(nodes):
-        #Add two random directed edges for each node.
-        index_range = [x for x in range(len(nodes)) if x != i]
-        first_index = random.choice(index_range)
-        node.add_edge(nodes[first_index])
-
-        index_range = [x for x in range(len(nodes)) if x != i and x != first_index]
-        second_index = random.choice(index_range)
-        node.add_edge(nodes[second_index])
+    g = get_sample_graph()
     
     for node in g.get_nodes():
-        print(node, '->', node.adjacent)
+        print(node)
 
     root = g.get_root()
     print('Depth First Search:')
