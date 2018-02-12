@@ -29,26 +29,17 @@ def test_route():
 #Problem 4.2
 #Given a sorted (increasing order) array with unique integer elements,
 #write an algorithm to create a binary search tree with minimal height.
-def minimal_tree():
-    a = [1, 2, 3, 4, 5]
+def minimal_tree(a):
+    if len(a) == 0:
+        return None
+
     m = len(a) // 2
-    
     root = BinaryTreeNode(a[m])
-    i = m - 1
-    j = m + 1
-    while i >= 0 or j < len(a):
-        left_tree_node = BinaryTreeNode(a[i])
-        bst_insert(root, left_tree_node)
-        i += 1
-
-        right_tree_node = BinaryTreeNode(a[j])
-        bst_insert(root, right_tree_node)
-        j -= 1
-
-    while i >= 0:
-        left_tree_node = BinaryTreeNode(a[i])
-        bst_insert(root, left_tree_node)
-
-    while j < len(a):
-        right_tree_node = BinaryTreeNode(a[j])
-        bst_insert(root, right_tree_node)
+    
+    left_tree = minimal_tree(a[:m])
+    right_tree = minimal_tree(a[m + 1:])
+    
+    root.left = left_tree
+    root.right = right_tree
+    
+    return root
