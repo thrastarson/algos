@@ -1,5 +1,5 @@
 class TrieNode:
-    def __init__(self, label=None, alphabet='abcdefghijklmnopqrstuvwxyz')
+    def __init__(self, label=None, alphabet='abcdefghijklmnopqrstuvwxyz'):
         self.label = label
         self.children = {x: None for x in alphabet}
         self.terminating = True
@@ -14,7 +14,7 @@ def bst_insert(root, node):
     if root is None:
         root = None
     else:
-        if data <= root.data:
+        if node.data <= root.data:
             if root.left is None:
                 root.left = node
             else:
