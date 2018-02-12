@@ -19,7 +19,7 @@ class GraphNode:
         return 'GraphNode(%s)' % self.val
 
     def __str__(self):
-        return str(self.val)
+        return '%3s' % str(self.val)
 
 class Graph:
     #Implements a graph using adjacency lists.
@@ -32,11 +32,21 @@ class Graph:
     def get_nodes(self):
         return self.nodes
 
+    def get_root(self):
+        if self.size() > 0:
+            return self.nodes[0]
+        else:
+            return None
+
+    def reset_marked(self):
+        for node in self.nodes:
+            node.marked = False
+
     def size(self):
         return len(self.nodes)
 
     def __repr__(self):
-        return 'Graph(%s)' % [str(node) for node in self.nodes]
+        return 'Graph(%3s)' % [str(node) for node in self.nodes]
 
 def df_search(root, visit):
     visit(root)
@@ -47,13 +57,12 @@ def df_search(root, visit):
 
 def bf_search(root, visit):
     q = MyQueue()
+    root.marked = True
     q.add(root)
     
     while not q.is_empty():
-        node = q.remove()
-        node.marked = True
+        node = q.remove().data
         visit(node)
-        
         for adjacent_node in node.adjacent:
             if adjacent_node.marked is False:
                 adjacent_node.marked = True
@@ -75,11 +84,27 @@ def main():
         g.add(node)
 
     nodes = g.get_nodes()
-    for node in nodes:
+    for i, node in enumerate(nodes):
         #Add two random directed edges for each node.
-        node.add_edge(random.choice(nodes))
-        node.add_edge(random.choice(nodes))
-    print(g)
+        index_range = [x for x in range(len(nodes)) if x != i]
+        first_index = random.choice(index_range)
+        node.add_edge(nodes[first_index])
+
+        index_range = [x for x in range(len(nodes)) if x != i and x != first_index]
+        second_index = random.choice(index_range)
+        node.add_edge(nodes[second_index])
+    
+    for node in g.get_nodes():
+        print(node, '->', node.adjacent)
+
+    root = g.get_root()
+    print('Depth First Search:')
+    df_search(root, print)
+    
+    g.reset_marked()
+    
+    print('Breadth First Search:')
+    bf_search(root, print)
 
 if __name__ == '__main__':
     main()
