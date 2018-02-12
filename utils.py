@@ -1,31 +1,10 @@
 import random
-from graphs import Graph, GraphNode
 
 def sort_string(w):
     return ''.join(sorted(w))
 
 def get_random_list(size=10):
     return [random.randint(0, 100) for i in range(size)]
-
-def get_sample_graph(size=10):
-    a = get_random_list(size)
-    g = Graph()
-    for x in a:
-        node = GraphNode(val=x)
-        g.add(node)
-
-    nodes = g.get_nodes()
-    for i, node in enumerate(nodes):
-        #Add two random directed edges for each node.
-        index_range = [x for x in range(len(nodes)) if x != i]
-        first_index = random.choice(index_range)
-        node.add_edge(nodes[first_index])
-
-        index_range = [x for x in range(len(nodes)) if x != i and x != first_index]
-        second_index = random.choice(index_range)
-        node.add_edge(nodes[second_index])
-
-    return g
 
 def is_sorted(a):
     return a == sorted(a)

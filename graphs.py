@@ -38,6 +38,12 @@ class Graph:
         else:
             return None
 
+    def get_random_node(self):
+        if len(self.nodes) > 1:
+            return random.choice(self.nodes[1:])
+        else:
+            return None
+
     def reset_marked(self):
         for node in self.nodes:
             node.marked = False
@@ -68,9 +74,25 @@ def bf_search(root, visit):
                 adjacent_node.marked = True
                 q.add(adjacent_node)
 
+def get_sample_graph(size=10):
+    a = get_random_list(size)
+    g = Graph()
+    for x in a:
+        node = GraphNode(val=x)
+        g.add(node)
 
-def is_same_node(s, t):
-    return s is t
+    nodes = g.get_nodes()
+    for i, node in enumerate(nodes):
+        #Add two random directed edges for each node.
+        index_range = [x for x in range(len(nodes)) if x != i]
+        first_index = random.choice(index_range)
+        node.add_edge(nodes[first_index])
+
+        index_range = [x for x in range(len(nodes)) if x != i and x != first_index]
+        second_index = random.choice(index_range)
+        node.add_edge(nodes[second_index])
+
+    return g
 
 class MatrixGraph:
     #Implements a graph using an adjacency matrix.
