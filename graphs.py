@@ -15,6 +15,9 @@ class GraphNode:
     def add_edge(self, node):
         self.adjacent.append(node)
 
+    def __repr__(self):
+        return 'GraphNode(%s)' % self.val
+
     def __str__(self):
         return str(self.val)
 
@@ -32,8 +35,8 @@ class Graph:
     def size(self):
         return len(self.nodes)
 
-    def __string__(self):
-        return str(self.nodes)
+    def __repr__(self):
+        return 'Graph(%s)' % [str(node) for node in self.nodes]
 
 def df_search(root, visit):
     visit(root)
@@ -63,7 +66,6 @@ class MatrixGraph:
         self.size = size
         self.matrix = [[False for x in range(n)] for y in range(n)]
 
-
 def main():
     a = get_random_list()
     
@@ -77,6 +79,7 @@ def main():
         #Add two random directed edges for each node.
         node.add_edge(random.choice(nodes))
         node.add_edge(random.choice(nodes))
+    print(g)
 
 if __name__ == '__main__':
     main()
