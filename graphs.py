@@ -46,7 +46,7 @@ class Graph:
         return len(self.nodes)
 
     def __repr__(self):
-        return 'Graph(%3s)' % [str(node) for node in self.nodes]
+        return 'Graph(%3s)' % self.nodes
 
 def df_search(root, visit):
     visit(root)
