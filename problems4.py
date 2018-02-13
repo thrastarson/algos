@@ -95,7 +95,7 @@ def test_list_of_depths():
     for li in depth_lists:
         li.print_list()
 
-#Problems 4.4
+#Problem 4.4
 #Implement a function to check if a binary tree is balanced.
 #For the purposes of this question, a balanced tree is defined
 #to be a tree such that the heights of the two subtrees of any
@@ -129,3 +129,26 @@ def height(root):
         left_height = height(root.left)
         right_height = height(root.right)
         return max(left_height, right_height) + 1
+
+#Problem 4.5
+#Implement a function to check if a binary tree is a binary
+#search tree.
+def validate_bst(root):
+    """
+    This solution does an inorder traversal, checking
+    if the BST conditions hold for every node 
+    in the tree.
+    """
+    if root is not None:
+        validate_bst(root.left)
+        
+        if root.left is not None:
+            if root.left.data > root.data:
+                return False
+
+        if root.right is not None:
+            if root.right.data <= root.data:
+                return False
+
+        validate_bst(root.right)
+    return True
