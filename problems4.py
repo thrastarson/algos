@@ -79,7 +79,7 @@ def list_of_depths(root):
 
     return depth_lists
 
-def test_list_of_depths():
+def get_binary_tree():
     root = BinaryTreeNode(5)
     bst_insert(root, BinaryTreeNode(4))
     bst_insert(root, BinaryTreeNode(0))
@@ -87,7 +87,45 @@ def test_list_of_depths():
     bst_insert(root, BinaryTreeNode(8))
     bst_insert(root, BinaryTreeNode(9))
     bst_insert(root, BinaryTreeNode(1))
+    return root
 
+def test_list_of_depths():
+    root = get_binary_tree()
     depth_lists = list_of_depths(root)
     for li in depth_lists:
         li.print_list()
+
+#Problems 4.4
+#Implement a function to check if a binary tree is balanced.
+#For the purposes of this question, a balanced tree is defined
+#to be a tree such that the heights of the two subtrees of any
+#node never differ by more than one.
+def check_balanced(root):
+    if root is None:
+        return True
+
+    left_height = height(root.left)
+    right_height = height(root.right)
+    balanced = abs(left_height - right_height) <= 1
+
+    return (balanced 
+            and check_balanced(root.left) 
+            and check_balanced(root.right))
+
+def test_balanced():
+    root = get_binary_tree()
+    print(check_balanced(root))
+
+def test_height():
+    root = get_binary_tree()
+    print(height(root))
+
+def height(root):
+    if root is None:
+        return 0
+    elif root.left is None and root.right is None:
+        return 1
+    else:
+        left_height = height(root.left)
+        right_height = height(root.right)
+        return max(left_height, right_height) + 1
