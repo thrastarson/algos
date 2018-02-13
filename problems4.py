@@ -1,5 +1,5 @@
 from graphs import bf_search, get_sample_graph, GraphNode, Graph
-from trees import BinaryTreeNode, bst_insert
+from trees import BinaryTreeNode, bst_insert, search
 from queues import MyQueue
 from stacks import Stack
 from lists import LinkedList
@@ -229,3 +229,20 @@ def build_order(projects, dependencies):
                 q.add(adjacent_node)
 
     return task_list
+
+#Problem 4.8
+#Design an algorithm and write code to find the first common
+#ancestor of two nodes in a binary tree. Avoid storing additional
+#nodes in a data structure. Note: This is not necessarily
+#a binary search tree.
+def first_common_ancestor(root, s, t):
+    curr_node = root
+    both_in_left = search(curr_node.left, s) and search(curr_node.left, t)
+    both_in_right = search(curr_node.right, s) and search(curr_node.right, t)
+    while both_in_left or both_in_right:
+        if both_in_left:
+            curr_node = curr_node.left
+        elif both_in_right:
+            curr_node = curr_node.right
+
+    return curr_node

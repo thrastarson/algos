@@ -31,6 +31,15 @@ def bst_insert(root, node):
             else:
                 return bst_insert(root.right, node)
 
+def search(root, node):
+    if root is None:
+        return False
+
+    if root == node:
+        return True
+
+    return search(root.left) or search(root.right)
+
 def inorder_traversal(node, visit):
     if node is not None:
         inorder_traversal(node.left, visit)
