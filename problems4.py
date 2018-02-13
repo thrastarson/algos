@@ -1,6 +1,7 @@
-from graphs import bf_search, get_sample_graph
+from graphs import bf_search, get_sample_graph, GraphNode, Graph
 from trees import BinaryTreeNode, bst_insert
 from queues import MyQueue
+from stacks import Stack
 from lists import LinkedList
 
 #Problem 4.1
@@ -169,3 +170,62 @@ def successor(node):
         curr_node = curr_node.left
 
     return curr_node
+
+#Problem 4.7
+#You are given a list of projects and a list of dependencies
+#(which is a list of pairs of projects, where the second project
+#is dependent on the first project). All of a project's dependencies
+#must be built before the project is. Find a build order that will
+#allow the projects to be built. If there is no valid build order,
+#return an error.
+#Example:
+#Input: projects     a, b, c, d, e, f
+#       dependencies (a, d), (f, b), (b, d), (f, a), (d, c)
+#Output: f, e, a, b, d, c
+def build_order(projects, dependencies):
+    """
+    The solution to this problem is a topological search.
+    It builds a graph from the tasks and dependencies,
+    finds the independent tasks, and then performs a breadth first
+    search to identify a legal topological ordering.
+    """
+    #Build a graph where each projects is a node
+    #and each dependency is a directed edge from
+    #the dependent project to the earlier project.
+    node_dict = {x: GraphNode(val=x) for x in projects}
+    for dependency in dependencies:
+        first, second = dependency
+        node_dict[second].add_edge(node_dict[first])
+    
+    g = Graph()
+    for node in node_dict.values():
+        g.add(node)
+
+    nodes = node_dict.values()
+    independents = [node for node in nodes if len(node.adjacent)==0]
+
+    for node in nodes:
+        #Delete all edges from node.
+        node.adjacenct = []
+
+    for dependency in dependencies:
+        #Flip edge from original setup. Now projects that
+        #come first point to ones that should follow
+        first, second = dependency
+        node_dict[first].add_edge(node_dict[second])
+
+    q = MyQueue()
+    for node in independents:
+        q.add(node)
+
+    task_list = []
+    while not q.is_empty():
+        node = q.remove().data
+        task_queue.append(node.val)
+        node.marked = True
+        for adjacent_node in node.adjacent:
+            if adjacent_node.marked is False:
+                adjacent_node.marked = True
+                q.add(adjacent_node)
+
+    return task_list
