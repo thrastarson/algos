@@ -152,3 +152,20 @@ def validate_bst(root):
 
         validate_bst(root.right)
     return True
+
+#Problem 4.6
+#Write an algorithm to find the 'next' node (i.e. in-order successor)
+#of a given node in a binary search tree. You may assume that each
+#node has a link to its parent.
+def successor(node):
+    if node is None:
+        return Node
+
+    if node.right is None:
+        return node.parent
+
+    curr_node = node.right
+    while curr_node.left is not None:
+        curr_node = curr_node.left
+
+    return curr_node
