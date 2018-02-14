@@ -48,6 +48,15 @@ class LinkedList:
     def is_empty(self):
         return self.head is None
 
+    def clone(self):
+        cloned = LinkedList()
+        curr_node = self.head
+        while curr_node is not None:
+            node = Node(curr_node.data)
+            cloned.insert(node)
+        cloned.reverse()
+        return cloned
+
     def size(self):
         current_node = self.head
         count = 0
