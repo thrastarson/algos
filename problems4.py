@@ -1,3 +1,4 @@
+from itertools import permutations
 from graphs import bf_search, get_sample_graph, GraphNode, Graph
 from trees import BinaryTreeNode, bst_insert, search
 from queues import MyQueue
@@ -246,3 +247,89 @@ def first_common_ancestor(root, s, t):
             curr_node = curr_node.right
 
     return curr_node
+
+#Problem 4.9
+#A binary search tree was created by traversing through an array
+#from left to right and inserting each element. Given a binary
+#search tree with distinct elements, print all possible arrays
+#that could have led to this tree.
+def bst_sequences(root):
+    """
+    This is a Python implementation of Gayle's solution from CtCI.
+    I struggled with this problem so I just want to move past it.
+    """
+    result = LinkedList()
+
+    if root is None:
+        result.insert(LinkedList())
+        return result
+
+    prefix = LinkedList()
+    prefix.add(root.data)
+
+    #Recurse on left and right subtrees
+    left_sequences = all_sequences(root.left)
+    right_sequences = all_sequences(root.right)
+
+    #Weave together each list from the left and right sides.
+    while not left_sequences.is_empty():
+        left = left_sequences.get_first().data
+        while not right_sequences.is_empty():
+            right = right_sequences.get_first().data
+            weaved = LinkedList()
+            weave_lists(left, right, weaved, prefix)
+            result.add_all(weaved)
+
+    return result
+
+def weave_lists(first, second, results, prefix):
+    """
+    Weave lists together in all possible ways. The algorithm works
+    by removing the head from one list, recursing, and then doing
+    the same thing with the other list.
+    """
+    #One list is empty. Add a remainder [to a cloned] prefix and store results.
+    result = prefix.clone()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
