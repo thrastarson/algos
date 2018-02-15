@@ -1,0 +1,31 @@
+def get_bit(num, i):
+    #Return the value of the i-th bit in num.
+    num = int(to_binary_string(num), 2)
+    mask = 1 << i
+    return 1 if num & mask else 0
+
+def set_bit(num, i):
+    #Sets the i-th bit in num to be 1.
+    num = int(to_binary_string(num), 2)
+    mask = 1 << i
+    return num | mask
+
+def print_binary(num):
+    #Num is an int.
+    print(to_binary_string(num))
+
+def to_binary_string(num):
+    return "{0:b}".format(num)
+
+def main():
+    num = 113
+    print_binary(num)
+
+    bit = get_bit(num, 3)
+    print(bit)
+
+    num = set_bit(num, 3)
+    print_binary(num)
+
+if __name__ == '__main__':
+    main()
