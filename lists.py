@@ -19,6 +19,13 @@ class LinkedList:
         node._next = self.head
         self.head = node
 
+    def insert_last(data):
+        node = Node(data)
+        curr = self.head
+        while curr._next is not None:
+            curr = curr._next
+        curr._next = node
+
     def build_from_collection(self, a):
         a = list(a)
         while len(a) > 0:
