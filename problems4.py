@@ -268,8 +268,8 @@ def bst_sequences(root):
     prefix.add(root.data)
 
     #Recurse on left and right subtrees
-    left_sequences = all_sequences(root.left)
-    right_sequences = all_sequences(root.right)
+    left_sequences = bst_sequences(root.left)
+    right_sequences = bst_sequences(root.right)
 
     #Weave together each list from the left and right sides.
     while not left_sequences.is_empty():
@@ -289,10 +289,28 @@ def weave_lists(first, second, results, prefix):
     the same thing with the other list.
     """
     #One list is empty. Add a remainder [to a cloned] prefix and store results.
-    result = prefix.clone()
+    if first.is_empty() or second.is_empty():
+        result = prefix.clone()
+        result.add_all(first)
+        result.add_all(second)
+        results.insert(result)
+        return
 
+    #Recurse with head of first added to the prefix. Removing the head
+    #will damage first, so we'll need to put it back where we found it
+    #afterwards.
+    head_first = first.get_first().data
+    prefix.insert_last(head_first)
+    weave_lists(first, second, results, prefix)
+    _ = prefix.get_last()
+    first.insert(head_first)
 
-
+    #Do the same thing with second, damaging and then restoring the list.
+    head_second = second.get_first().data
+    prefix.insert_last(head_second)
+    weave_lists(first, second, results, prefix)
+    _ = prefix.get_last()
+    second.insert(head_second)
 
 
 
