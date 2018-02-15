@@ -52,6 +52,22 @@ class LinkedList:
         self.head = self.head._next
         return first_node
 
+    def get_last(self):
+        if self.head is None:
+            return None
+
+        prev = None
+        curr = self.head
+        
+        while curr._next is not None:
+            curr = curr._next
+            prev = prev._next
+
+        if prev is not None:
+            prev._next = None
+        
+        return curr
+
     def is_empty(self):
         return self.head is None
 
