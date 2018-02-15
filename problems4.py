@@ -1,3 +1,4 @@
+import random
 from itertools import permutations
 from graphs import bf_search, get_sample_graph, GraphNode, Graph
 from trees import BinaryTreeNode, bst_insert, search
@@ -333,3 +334,56 @@ def data_string(node, li=None):
         data_string(node.right, li)
 
     return '*'.join(li)
+
+#Problem 4.11
+#You are implementing a binary tree class from scratch which, in addition to
+#insert, find, and delete, has a method getRandomNode() which returns a random
+#node from the tree. All nodes should be equally likely to be chosen.
+#Design and implement an algorithm for getRandomNode, and explain how you would
+#implement the rest of the methods.
+class BST:
+    def __init__(self):
+        self.root = None
+        self.size = 0
+
+    def insert(self, node, root=self.root):
+        if root is None:
+            self.root = node
+        else:
+            if node.data <= root.data:
+                if root.left is None:
+                    root.left = node
+                else:
+                    self.insert(node, root.left)
+            else:
+                if root.right is None:
+                    root.right = node
+                else:
+                    self.insert(node, root.right)
+
+        self.size += 1
+
+    def find(self, node_no, node=self.root, count=0):
+        if node is not None:
+            self.find(node_no, node.left, count)
+            if count == node_no:
+                return node
+            else:
+                count += 1
+            self.find(node_no, node.right, count)
+
+    def get_random_node(self):
+        node_no = random.rand_int(1, self.size)
+        node = self.find(node_no)
+        return node
+
+    def delete(self, node):
+        parent = node.parent
+        if parent.left == node:
+            parent.left = None
+        else:
+            parent.right = None
+
+        left = node.left
+        node = node.right
+        self.insert(left)
