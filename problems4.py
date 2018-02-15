@@ -5,6 +5,9 @@ from queues import MyQueue
 from stacks import Stack
 from lists import LinkedList
 
+#The following problems are from the book Cracking the Coding Interview
+#by Gayle Laakmann McDowell. I reserve no rights for them.
+
 #Problem 4.1
 #Given a directed graph, design an algorithm to find out whether there is
 #a route between two nodes.
@@ -312,42 +315,21 @@ def weave_lists(first, second, results, prefix):
     _ = prefix.get_last()
     second.insert(head_second)
 
+#Problem 4.10
+#T1 and T2 are two very large binary trees, with T1 much bigger than T2.
+#Create an algorithm to determine if T2 is a subtree of T1.
+def check_subtree(t1, t2):
+    t1_string = data_string(t1)
+    t2_string = data_string(t2)
+    return t1_string in t2_string
 
+def data_string(node, li=None):
+    if li is None:
+        li = []
 
+    if node is not None:
+        li.append(node.data)
+        data_string(node.left, li)
+        data_string(node.right, li)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    return '*'.join(li)
