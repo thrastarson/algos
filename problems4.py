@@ -387,3 +387,45 @@ class BST:
         left = node.left
         node = node.right
         self.insert(left)
+
+#Problem 4.12
+#You are given a binary tree in which each node contains an integer value
+#(which might be positive or negative). Design an algorithm to count
+#the number of paths that sum to a given value. The path does not need
+#to start or end at the root or a leaf, but it must go downwards
+#(traveling only from parent nodes to child nodes).
+def paths_with_sum(root, target):
+    """
+    This solution is a direct python implementation of Gayle's solution
+    in CtCI.
+    """
+    return count_paths_with_sum(root, target, 0, path_count):
+
+def count_paths_with_sum(node, target, running_sum, path_count)
+    if node is None:
+        return 0
+
+    #Count paths with sum ending at the current node.
+    running_sum += node.data
+    current_sum = running_sum - target
+    total_paths = path_count.get(current_sum, 0)
+
+    #If runnin_sum equals target_sum, then one additional path
+    #starts at root. Add in this path.
+    if running_sum == target:
+        total_paths += 1
+
+    #increment path_count, recurse, then decrement path_count.
+    total_paths += count_paths_with_sum(node.left, target, running_sum, path_count)
+    total_paths += count_paths_with_sum(node.right, target, running_sum, path_count)
+    increment_path_count(path_count, running_sum, -1)
+
+    return total_paths
+
+def increment_path_count(path_count, key, delta):
+    new_count = path_count.get(key, 0) + delta
+    if new_count == 0:
+        #Remove when zero to reduce space usage.
+        _ = path_count.pop(key, None)
+    else:
+        path_count[key] = new_count
