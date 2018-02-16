@@ -1,4 +1,5 @@
 from bits import to_binary_string
+from collections import Counter
 
 #Problem 5.1
 #You are given two 32-bit numbers, N and M, and two bit positions, i and j.
@@ -83,7 +84,36 @@ def flip_bit_to_win(num):
 
     return max_length
 
+#Problem 5.4
+#Given a positive integer, print the next smallest and the next largest number
+#that have the same number of 1 bits in their binary representation.
+def next_number(num):
+    num_ones = count_ones(num)
+    
+    found_largest = False
+    larger = num + 1
+    while not found_largest:
+        ones = count_ones(larger)
+        if ones == num_ones:
+            found_largest = True
+        else:
+            larger += 1
 
+    found_smallest = False
+    smaller = num - 1
+    while not found_smallest:
+        ones = count_ones(smaller)
+        if ones == num_ones:
+            found_smallest = True
+        else:
+            smaller -= 1
+
+    return smaller, larger
+
+def count_ones(num):
+    bin_string = to_binary_string(num)
+    c = Counter(bin_string)
+    return c['1']
 
 
 
