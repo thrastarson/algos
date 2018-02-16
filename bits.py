@@ -10,7 +10,7 @@ def set_bit(num, i):
     mask = 1 << i
     return num | mask
 
-def clear_bit(num, i)
+def clear_bit(num, i):
     num = int(to_binary_string(num), 2)
     mask = ~(1 << i)
     return num & mask
@@ -19,7 +19,6 @@ def update_bit(num, i, bit_is_1):
     num = int(to_binary_string(num), 2)
     cleared = clear_bit(num, i)
     bit = 1 if bit_is_1 else 0
-    mask = ~(1 << i)
     return cleared | (bit_is_1 << i)
 
 def print_binary(num):
