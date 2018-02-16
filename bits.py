@@ -10,6 +10,11 @@ def set_bit(num, i):
     mask = 1 << i
     return num | mask
 
+def clear_bit(num, i)
+    num = int(to_binary_string(num), 2)
+    mask = ~(1 << i)
+    return num & mask
+
 def print_binary(num):
     #Num is an int.
     print(to_binary_string(num))
