@@ -1,3 +1,5 @@
+from bits import to_binary_string
+
 #Problem 5.1
 #You are given two 32-bit numbers, N and M, and two bit positions, i and j.
 #Write a method to insert M into N such that M starts at bit j and ends at bit i.
@@ -49,4 +51,55 @@ def binary_to_string(num):
             binary.append(0)
             num = r
     return ''.join(binary)
+
+#Problem 5.3
+#You have an integer and you can flip exactly one bit from a 0 to a 1.
+#Write code to find the length of the longest sequence of 1s you could create.
+#Example:
+#Input: 1775 (or: 11011101111)
+#Output: 8
+def flip_bit_to_win(num):
+    num = to_binary_string(num)
+    max_length = 1
+    prev_len = 0
+    curr_len = 0
+    max_length = 1
+    last_bit = 0
+    for i in num:
+        if i == '1':
+            curr_len += 1
+        else:
+            if prev_len + curr_len + 1 > max_length:
+                max_length = prev_len + curr_len + 1
+
+            if last_bit == 0:
+                prev_len = 0
+                curr_len = 0
+            else:
+                prev_len = curr_len
+                curr_len = 0
+
+            last_bit = 0
+
+    return max_length
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
