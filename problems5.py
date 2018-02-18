@@ -122,6 +122,44 @@ def count_ones(num):
 #Explain what the following code does: ((n & (n-1)) == 0)
 #Solution: It checks if n is a power of 2 (or if n is zero).
 
+#Problem 5.6
+#Write a function to determine the number of bits you would need
+#to flip to convert integer A to integer B.
+#Example:
+#Input: 29 (or: 11101), 15 (or: 01111)
+#Output: 2
+def conversion(n, m):
+    n = to_binary_string(n)
+    m = to_binary_string(m)
+
+    #reverse both binary strings.
+    n = n[::-1]
+    m = m[::-1]
+
+    i = 0
+    j = 0
+    flips = 0
+    while i < len(n) and j < len(m):
+        if n[i] != m[j]:
+            flips += 1
+        i += 1
+        j += 1
+
+
+    while i < len(n):
+        flips += 1
+        i += 1
+
+    while j < len(m):
+        flips += 1
+        j += 1
+
+    return flips
+
+
+
+
+
 
 
 
