@@ -1,6 +1,9 @@
 from bits import to_binary_string
 from collections import Counter
 
+#The following problems are from the book Cracking the Coding Interview
+#by Gayle Laakmann McDowell. I reserve no rights for them.
+
 #Problem 5.1
 #You are given two 32-bit numbers, N and M, and two bit positions, i and j.
 #Write a method to insert M into N such that M starts at bit j and ends at bit i.
