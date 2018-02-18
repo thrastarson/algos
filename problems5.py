@@ -118,6 +118,39 @@ def count_ones(num):
     c = Counter(bin_string)
     return c['1']
 
+#Problem 5.5
+#Explain what the following code does: ((n & (n-1)) == 0)
+#Solution: It checks if n is a power of 2 (or if n is zero).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
