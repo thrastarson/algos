@@ -156,7 +156,12 @@ def conversion(n, m):
 
     return flips
 
-
+def conversion2(n, m):
+    """
+    Take the XOR of n and m and count the occurrences
+    of the bit 1.
+    """
+    return to_binary_strin(n ^ m).count('1')
 
 
 
