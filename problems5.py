@@ -163,6 +163,29 @@ def conversion2(n, m):
     """
     return to_binary_strin(n ^ m).count('1')
 
+#Problem 5.7
+#Write a program to swap odd and even bits in an integer with as few
+#instructions as possible (e.g., bit 0 and bit 1 are swapped, bit 2
+#and bit 3 are swapped, and so on.
+def pairwise_swap(n):
+    n_bin = to_binary_string(n)
+    
+    odd_mask = ['01' for _ in range(len(n_bin)//2 + 1)]
+    odd_mask = ''.join(odd_mask)
+    odd_mask = int(odd_mask, 2)
+
+    even_mask = ['10' for _ in range(len(n_bin)//2 + 1)]
+    even_mask = ''.join(even_mask)
+    even_mask = int(even_mask, 2)
+
+    only_odd = n & odd_mask
+    only_even = n & even_mask
+    
+    odd_shifted = only_odd << 1
+    even_shifted = only_even >> 1
+    swapped = odd_shifted ^ even_shifted
+    
+    return swapped
 
 
 
