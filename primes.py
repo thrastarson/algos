@@ -22,3 +22,39 @@ def is_prime(n):
             return False
 
     return True
+
+def sieve_of_eratosthenes(n):
+    """
+    Implements an ancient algorithm for finding all prime numbers
+    up to any given limit, n. It does so by iteratively marking
+    the multiples of each prime starting with the number 2.
+    At the end only (and all) prime numbers <= n are left.
+    """
+    flags = [True for _ in range(n + 1)]
+    flags[0] = False
+    flags[1] = False
+
+    prime = 2
+    while prime <= math.floor(math.sqrt(n)):
+        cross_off(flags, prime)
+        prime = get_next_prime(flags, prime)
+    
+    all_primes = [i for i, _ in enumerate(a) if a[i] is True]
+    return all_primes
+
+def cross_off(flags, prime):
+    """
+    Cross off remaining multiples of prime. We can start with (prime*prime)
+    because if we have a k * prime, where k < prime, this value would have
+    already been crossed off in a prior iteration.
+    """
+    i = prime * prime
+    while i < len(flags):
+        flags[i] = False
+        i += prime
+
+def get_next_prime(flags, prime):
+    next_prime = prime + 1
+    while next_prime < len(flags) and flags[next_prime] is False:
+        next_prime += 1
+    return next_prime
