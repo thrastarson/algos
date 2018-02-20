@@ -104,3 +104,20 @@ Solution:
                  = 1 - 0.25
                  = 0.75
 """
+
+#Problem 6.5
+#You have a five-quart jug, a three-quart jug, and an unlimited supply of water
+#(but no measuring cups). How would you come up with exactly four quarts of water?
+#Note that the jugs are oddly shaped, such that filling up exactly "half" of the jug
+#would be impossible.
+"""
+Solution:
+    We need to solve the equation 3x + 4 = 5y.
+    A solution to this is y=4 and x=7.
+    So to get 4 quarts of water, we must first fill up the 5 quart jug
+    5 times to get a total of 25 quarts. Then we must use the 3 quart jug
+    and fill it 7 times from the 25 quarts and discard.
+    The amount of water that is remaining is 4 quarts.
+"""
+
+
