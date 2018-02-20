@@ -57,3 +57,22 @@ Solution:
     Most people will should a basketball with p < 1/2, so realistically
     choosing G1 is most often the best choice.
 """
+
+#Problem 6.3
+#There is an 8x8 chessboard in which two diagonally opposite corners have
+#been cut off. You are given 31 dominoes, and a single domino can cover
+#exactly two squares. Can you use the 31 dominoes to cover the entire board?
+#Prove your answer (by providing an example or showing why it's impossible.
+"""
+Solution:
+    On a chessboard all squares on either diagonal are of the same colour.
+    Therefore, the two missing squares are both of the same colour.
+    Let's say that the missing squares are both white.
+    A domino will always cover one black square and one white square.
+    The total count of black squares is 32 but the total count of white
+    squares is only 30. Therefore it is impossible to lay down all the dominos
+    to cover the board.
+    The task is impossible.
+"""
+
+
