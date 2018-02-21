@@ -13,7 +13,17 @@ class Card:
         
         self.suits = ['Clubs', 'Diamonds', 'Hearts', 'Spades']
         self.suit = suit
-        self.rank = rank
+        
+        if rank == 1 and aces_high:
+            self.rank = 14
+        else:
+            self.rank = rank
+    
+    def is_face_card(self):
+        return self.ranks[self.rank] in ('Jack', 'Queen', 'King')
+
+    def is_ace(self):
+        return self.rank == 1 or self.rank == 14
 
     def __str__(self):
         if aces_high:
@@ -57,7 +67,7 @@ class Deck:
     def is_empty(self):
         return len(self.deck) == 0
 
-def Hand:
+class Hand:
     def __init__(self, hand=None):
         if hand is None:
             self.hand = []
@@ -69,3 +79,41 @@ def Hand:
 
     def add_card(self, card)
         self.hand.append(card)
+
+class BlackJackHand(Hand):
+    def __init__(self, hand=None):
+        super().__init__(hand=hand)
+
+    def score(self):
+        high_score = 0
+        low_score = 0
+        for card in self.hand:
+            if card.is_face_card():
+                low_score += 10
+                high_score += 10
+            elif card.is_ace():
+                low_score += 1
+                high_score += 11
+            else:
+                low_score += card.rank
+                high_score += card.rank
+        
+        if scores[0] == scores[1]:
+            return scores[0]
+        else:
+            if high_score <= 21 or low_score <= 21:
+                return max(high_score, low_score)
+            else:
+                return min(high_score, low_score)
+    
+    def busted(self):
+        return self.score() > 21
+
+    def is_21(self):
+        return self.score() == 21
+
+    def is_black_jack(self):
+        return len(self.hand) == 2 and self.is_21()
+
+    def is_push(self, other):
+        if self.score() == other.score()
