@@ -191,8 +191,40 @@ def gender_ratio():
 
     return girl_ratio, 1-girl_ratio
 
+#Problem 6.8
+#There is a building with 100 floors. If an egg drops from the Nth floor
+#or above, it will break. If it's dropped from any floor below, it will
+#not break. You're given two eggs. Find N, while minimizing the number
+#of drops for the worst case.
+"""
+Solution:
+    Any algorithm that starts by dropping egg 1 somewhere low in the building
+    and then gradually works its way up will have its worst case if N 
+    is close to the top. That's because we assume it'll take a bunch of drops
+    to move up towards the top and then some constant number of drops of egg 2
+    to determine the exact N.
+    To optimize for this worst case we must load balance the drops in some
+    way so that we'll end up dropping egg 1 and egg 2 close to an equal
+    number of time.
+    For this to be possible we must reduce the potential number of steps
+    required by egg 2 by 1 on each drop of egg 1.
+    So egg 1 must start at floor X, then go to floor X-1, then X-2 up until 
+    floor 100.
+    To determine the starting floor X we solve,
 
+        X + (X-1) + (X-2) + ... + 1 = 100
 
+    Notice that the left side is the sum of all integers from 1 up until X, so
 
+        (X(X+1)) / 2 = 100
+                   X ~ 13.65
 
+    We round this up to an integer, X=14. So the algorithm becomes:
 
+    Go to floor 14 and drop egg 1. If egg 1 doesn't break...
+    Go to floor 14 + 13 = 27 and drop egg 1. If egg 1 doesn't break...
+    Go to floor 27 + 12 = 39 and drop egg 1. If egg 1 doesn't break...
+    ...
+
+    This takes 14 steps in the worst case.
+"""
