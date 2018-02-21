@@ -120,4 +120,34 @@ Solution:
     The amount of water that is remaining is 4 quarts.
 """
 
+#Problem 6.6
+#A bunch of people are living on an island, when a visitor comes with a strange order:
+#all blue-eyed people must leave the island as soon as possible. There will be a flight
+#out at 8pm every evening. Each person can see everyone else's eye color, but they do
+#not know their own (nor is anyone allowed to tell them). Additionally, they do not know
+#how many people have blue eyes, although they do know that at least one person does.
+#How many days will it take the blue-eyed people to leave.
+"""
+Solution:
+    Let's define B as the number of blue eyed people on the island,
+    and t the number of days it takes for all B to leave the island.
+    Rule 1: We need B>=1 to reason about this problem.
+    If B=1, this blue eyed person will only see non-blue eyed person. It can therefore
+    deduce that by Rule 1 it must be the only blue eyed person on the island. This
+    person will therefore leave on the first day, so t=1.
+    If B=2, let's assume that both blue eyed people are aware of the result for B=1.
+    Since the blue eyed person they can see does not leave on the first day, they know
+    that B=2. This will be apparent to both blue eyed people at the same time, on the second day.
+    So t=2.
+    Extending this argument, if B=n then all n people will realize they are blue eyed only
+    when nobody leaves at day n-1, so they will all leave at day t=n.
+    So generally, t=B.
+"""
+
+
+
+
+
+
+
 
