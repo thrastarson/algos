@@ -245,3 +245,34 @@ Solution:
     There are 10 perfect squares, by looking at 1*1, 2*2, ..., 10*10.
     Therefore 10 doors will be open at the end.
 """
+
+#Problem 6.10
+#You have 1000 bottles of soda, and exactly one is poisoned. You have 10 test
+#strips which can be used to detect poison. A single drop of poison will turn
+#the test strip positive permanently. You can put any number of drops on a
+#test strip at once and you can reuse a test strip as many times as you'd like
+#(as long as the results are negative). However, you can only run tests once
+#per day and it takes seven days to return a result. How would you figure out
+#the poisoned bottle in as few days as possible?
+#Follow up:
+#Write code to simulate your approach.
+"""
+Solution:
+    Put a drop from bottles 1-100 on one strip, a drop from bottles 101-200
+    on another strip, etc. until 10 strips each have drops from 100 bottles
+    covering the entire 1000 bottles.
+    Wait 7 days, now 1 strip exactly is positive. Discard it.
+    Let's say it's the strip from bottles 1-100.
+    Now put drops from bottles 1-10 on one strip, drops from bottles 11-20
+    on another strip, ..., drops from bottles 81-90 on the last, 9th, strip.
+    Now either one of 9 strips comes back positive for poison, or if none
+    does then we know the poisonous bottle is in batch 91-100.
+    If no strip comes back positive with poison, finding the poisonous
+    bottle is trivial from using the remaining 8 tests. The total number
+    of days to determine this is 21 days.
+    If a strip came back poisonous, take that batch of bottles (say 1-10),
+    and test one each on the remaining 8 tests. Leave 2 out.
+    They will either come back positive, for a total days to determine
+    of 28 days, or we need to retest the remaining 2 bottles, for a worst
+    case testing time of 35 days.
+"""
