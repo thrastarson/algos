@@ -50,3 +50,22 @@ class Deck:
 
     def sort(self):
         self.deck.sort()
+
+    def size(self):
+        return len(self.deck)
+
+    def is_empty(self):
+        return len(self.deck) == 0
+
+def Hand:
+    def __init__(self, hand=None):
+        if hand is None:
+            self.hand = []
+        else:
+            self.hand = hand
+
+    def score(self):
+        return sum(card.rank for card in self.hand)
+
+    def add_card(self, card)
+        self.hand.append(card)
