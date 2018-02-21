@@ -36,4 +36,17 @@ class Deck:
         self.deck = [Card(rank, suit) for rank in self.ranks
                                       for suit in self.suits]
 
+    def shuffle(self):
+        random.shuffle(self.deck)
 
+    def add_card(self, card):
+        self.deck.append(card)
+
+    def remove_card(self):
+        return self.deck.remove(card)
+
+    def pop_card(self, index=-1)
+        return self.cards.pop(index)
+
+    def sort(self):
+        self.deck.sort()
