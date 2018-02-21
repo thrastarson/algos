@@ -228,3 +228,20 @@ Solution:
 
     This takes 14 steps in the worst case.
 """
+
+#Problem 6.9
+#There are 100 closed lockers in a hallway. A man begins by opening all 100 
+#lockers. Next, he closes every second locker. Then, on his third pass,
+#he toggles every third locker (closes it if it is open or opens it if
+#it is closed). This process continues for 100 passes, such that on each pass i,
+#the man toggles every ith locker. After his 100th pass in the hallway, in which
+#he toggles only locker #100, how many lockers are open?
+"""
+Solution:
+    A door n is toggled once for each factor of n, including itself and 1.
+    That is, door 15 is toggled on rounds 1, 3, 5, and 15.
+    A door is left open at the end if the number of factors, x, is odd.
+    The value x is odd if n is a perfect square.
+    There are 10 perfect squares, by looking at 1*1, 2*2, ..., 10*10.
+    Therefore 10 doors will be open at the end.
+"""
