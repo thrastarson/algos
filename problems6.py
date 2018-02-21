@@ -1,3 +1,5 @@
+import random
+
 #The following problems are from the book Cracking the Coding Interview
 #by Gayle Laakmann McDowell. I reserve no rights for them.
 
@@ -144,7 +146,50 @@ Solution:
     So generally, t=B.
 """
 
+#Problem 6.7
+#In the new post-apocalyptic world, the world queen is desperately concerned about
+#the birth rate. Therefore, she decrees that all families should ensure that they
+#have one girl or else they face massive fines. If all families abide by this policy
+# - that is, they have to continue to have children until they have one girl,
+#at which point they immediately stop - what will the gender ratio of the new
+#generation be? (Assume that the odds of someone having a boy or a girl on any given
+#pregnancy is equal.) Solve this out logically and then write a computer simulation of it.
+"""
+Solution:
+    Every family will have n children, of which n-1 are boys, and 1 is a girl.
+    Every family wil also have a sequence of 0..n-1 boys before having 1 girl.
+    The probability of having either gender is P(G)=P(B)=0.5.
+    A family will have its girl on try i, with the probability:
+        i = 1, P(G) = 1/2
+        i = 2, P(BG) = 1/4
+        i = 3, P(BBG) = 1/8
+        i = 4, P(BBBG) = 1/16
+        ...
+        i = n, P(BB..G) = 1/2^n
 
+    Every family has exactly 1 girl. On average every family will have 
+    the sum of i/2^i boys for i=1..n. This sum converges to 1, so we can assume
+    that the gender balance will remain equal in the population.
+"""
+def gender_ratio():
+    families = 1000000
+    population = {'b': 0, 'g': 0}
+    for family in range(families):
+        girl_is_born = False
+        while not girl_is_born:
+            rand = random.random()
+            if rand < 0.5:
+                #a boy is born
+                population['b'] += 1
+            else:
+                #a girl is born
+                population['g'] += 1
+                girl_is_born = True
+
+    total = population['g'] + population['b']
+    girl_ratio = population['g'] / total
+
+    return girl_ratio, 1-girl_ratio
 
 
 
