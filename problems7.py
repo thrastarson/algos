@@ -1,5 +1,8 @@
 import random
 
+#The following problems are from the book Cracking the Coding Interview
+#by Gayle Laakmann McDowell. I reserve no rights for them.
+
 #Problem 7.1.
 #Design the data structures for a generic deck of cards. Explain how you
 #would subclass the data structures to implement blackjack.
