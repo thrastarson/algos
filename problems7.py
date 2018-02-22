@@ -1,4 +1,5 @@
 import random
+import time
 
 #The following problems are from the book Cracking the Coding Interview
 #by Gayle Laakmann McDowell. I reserve no rights for them.
@@ -206,20 +207,59 @@ class Song:
         self.duration = duration
         self.genre = genre
 
+#Problem 7.4
+#Design a parking lot using object-oriented principles.
+class Lot:
+    def __init__(self, spaces, rates):
+        self.spaces = spaces
+        self.available = len(spaces)
+        self.rates = rates
 
+    def total_spaces(self):
+        return len(self.spaces)
 
+    def free_spaces(self, space_type=None):
+        if space_type is None:
+            return self.available
+        else:
+            return len([space for space in self.spaces if space.is_free(space_type)])
 
+    def park(self, space, car):
+        if space not in spaces:
+            raise ValueError('Space does not belong to park')
+        space.fill_space(car)
+        self.available -= 1
 
+    def unpark(self, space):
+        if space not in spaces:
+            raise ValueError('Space does not belong to park')
+        self.unfill_space()
+        self.available += 1
 
+class Space:
+    def __init__(self, space_type, is_free):
+        #Values like "Normal", "Small car", "Family", "Electric"
+        self.space_type = space_type
+        self.is_free = is_free
+        self.car = None
+        self.expires = None
 
+    def is_free(self, space_type=None):
+        if space_type is None:
+            return self.is_free
+        else:
+            return self.is_free and self.space_type == space_type
 
+    def fill_space(self, car, expire_time):
+        self.is_free = False
+        self.car = car
+        self.expires = expire_time
 
+    def unfill_space(self):
+        self.is_free = True
+        self.car = None
+        self.expires = None
 
-
-
-
-
-
-
-
-
+    def time_until_expires(self):
+        time = now()
+        return expires - time
