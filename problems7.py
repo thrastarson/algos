@@ -176,7 +176,32 @@ class Director(Employee):
     def __init__(self, name):
         super().__init__(name)
     
+#Problem 7.3
+#Design a musical jukebox using object-oriented principles.
+class Jukebox:
+    def __init__(self, songs):
+        self.songs = songs
+        self.balance = 0
+        self.cost = 25
 
+    def play(self, song):
+        if self.balance >= self.cost:
+            self.balance -= self.cost
+            #play the song
+        
+    def survey_selection(self):
+        print(sorted(self.songs, (song.artist, song.name)))
+
+    def add_balance(self, amount):
+        self.balance += amount
+
+class Song:
+    def __init__(self, name, artist, year, duration, genre):
+        self.name = name
+        self.artist = artist
+        self.year = year
+        self.duration = duration
+        self.genre = genre
 
 
 
