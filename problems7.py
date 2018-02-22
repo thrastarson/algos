@@ -117,3 +117,81 @@ class BlackJackHand(Hand):
 
     def is_push(self, other):
         if self.score() == other.score()
+
+#Problem 7.2
+#Imagine you have a call center with three levels of employees: respondents,
+#manager, and director. An incoming telephone call must be first allocated
+#to a respondent who is free. If the respondent can't handle the call, he
+#or she must escalate the call to a manager. If the manager is not free or not
+#able to handle it, then the call should be escalated to a director. Design
+#the classes and data structures for this problem. Implement a method dispatchCall()
+#which assigns a call to the first available employee.
+class CallCenter:
+    def __init__(self, director, manager, respondents):
+        if respondents is None:
+            self.respondents = []
+        else:
+            self.respondents = respondents
+
+        self.director = director
+        self.manager = manager
+
+    def dispatch_call(self, call):
+        for respondent in self.respondents:
+            if respondent.is_free():
+                respondent.assign_call(call)
+                return
+
+        if manager.is_free():
+            manager.assign_call(call)
+        elif director.is_free():
+            director.assign_call(call)
+        else:
+            raise ValueError('Nobody is available.')
+
+class Employee:
+    def __init__(self, name):
+        self.name = name
+        self.is_free = True
+
+    def is_free(self):
+        return self.is_free
+
+    def assign_call(self, call):
+        self.is_free = False
+        self.process_call(call)
+
+    def process_call(self, call):
+        #something
+
+class Respondent(Employee):
+    def __init__(self, name):
+        super().__init__(name)
+
+class Manager(Employee):
+    def __init__(self, name):
+        super().__init__(name)
+
+class Director(Employee):
+    def __init__(self, name):
+        super().__init__(name)
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
