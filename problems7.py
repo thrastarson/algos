@@ -267,8 +267,9 @@ class Space:
 #Problem 7.5
 #Design the data structures for an online book reader system.
 class BookReader:
-    def __init__(self, books):
+    def __init__(self, books, users):
         self.books = books
+        self.users = users
 
     def list_authors(self):
         return [book.author for book in self.books]
@@ -276,8 +277,28 @@ class BookReader:
     def list_titles(self):
         return [book.title for book in self.books]
 
+    def read(self, user, book):
+        #read book somehow
+
+    def add_book(self, book):
+        self.book.append(book)
+
+    def remove_book(self, book):
+        _ = self.book.remove(book)
+
+    def add_user(self, user):
+        self.users.append(user)
+
+    def remove_user(self, user):
+        _ = self.users.remove(user)
+
+class User:
+    def __init__(self, user_name):
+        self.user_name
+
 class Book:
-    def __init(self, title, author, year, genre):
+    def __init__(self, book_id, title, author, year, genre):
+        self.book_id = book_id
         self.title = title
         self.author = author
         self.year = year
