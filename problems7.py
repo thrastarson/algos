@@ -263,3 +263,54 @@ class Space:
     def time_until_expires(self):
         time = now()
         return expires - time
+
+#Problem 7.5
+#Design the data structures for an online book reader system.
+class BookReader:
+    def __init__(self, books):
+        self.books = books
+
+    def list_authors(self):
+        return [book.author for book in self.books]
+
+    def list_titles(self):
+        return [book.title for book in self.books]
+
+class Book:
+    def __init(self, title, author, year, genre):
+        self.title = title
+        self.author = author
+        self.year = year
+        self.genre = genre
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
