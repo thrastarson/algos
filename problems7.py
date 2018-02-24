@@ -278,7 +278,7 @@ class BookReader:
         return [book.title for book in self.books]
 
     def read(self, user, book):
-        #read book somehow
+        user.read_book(book)
 
     def add_book(self, book):
         self.book.append(book)
@@ -293,8 +293,12 @@ class BookReader:
         _ = self.users.remove(user)
 
 class User:
-    def __init__(self, user_name):
+    def __init__(self, user_name, active_books):
         self.user_name
+        self.active_books = active_books
+
+    def read_book(self, book):
+        self.active_books.append(book)
 
 class Book:
     def __init__(self, book_id, title, author, year, genre):
