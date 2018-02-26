@@ -1,3 +1,6 @@
+#The following problems are from the book Cracking the Coding Interview
+#by Gayle Laakmann McDowell. I reserve no rights for them.
+
 #Problem 8.1
 #A child is running up a staircase with n steps and can hop
 #either 1 step, 2 steps, or 3 steps at a time. Implement
