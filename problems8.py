@@ -74,3 +74,17 @@ def magic_index(a):
     The obvious solution.
     """
     return any(i == x for i, x in enumerate(a))
+
+def magic_index1(a, i=None, j=None):
+    """
+    A recursive solution.
+    """
+    if i is None and j is None:
+        i = 0
+        j = len(a) - 1
+
+    if len(a[i:j+1]) == 1:
+        return a[i] == i
+    else:
+        m = (j - i) // 2
+        return magic_index1(a, i, m) or magic_index1(a, m + 1, j)
