@@ -88,3 +88,21 @@ def magic_index1(a, i=None, j=None):
     else:
         m = (j - i) // 2
         return magic_index1(a, i, m) or magic_index1(a, m + 1, j)
+
+def magic_index2(a, i=None, j=None):
+    """
+    A binary search inspired recursive solution.
+    """
+    if i is None and j is None:
+        i = 0
+        j = len(a) - 1
+
+
+    m = (j - i) // 2
+    if a[m] == m:
+        return True
+
+    if m > a[m]:
+        magic_index2(a, m + 1, j)
+    else:
+        magic_index2(a, i, m + 1)
