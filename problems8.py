@@ -141,5 +141,19 @@ def recursive_multiply(a, b):
     else:
         return a + recursive_multiply(a, b-1)
 
+def recursive_multiply2(a, b):
+    bigger = a if a < b else b
+    smaller = a if a < b else b
 
+    if smaller == 0:
+        return 0
+    elif smaller == 1:
+        return bigger
+    
+    s = smaller // 2
+    half_prod = recursive_multiply2(s, bigger)
 
+    if smaller % 2 == 0:
+        return half_prod + half_prod
+    else:
+        return half_prod + half_prod + bigger
