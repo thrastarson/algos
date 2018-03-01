@@ -106,3 +106,27 @@ def magic_index2(a, i=None, j=None):
         magic_index2(a, m + 1, j)
     else:
         magic_index2(a, i, m + 1)
+
+#Problem 8.4
+#Write a method to return all subsets of a set.
+def power_set(a, memo=None):
+    if memo is None:
+        memo = set()
+        memo.add('empty')
+        a = list(a)
+
+    if len(a) == 0:
+        return memo
+
+    val = a.pop()
+    memo.add(val)
+    
+    for subset in memo:
+        if subset == 'empty':
+            continue
+
+        subset_copy = set(list(subset))
+        subset_copy.add(val)
+        memo.add(subset_copy)
+
+    power_set(a, memo)
