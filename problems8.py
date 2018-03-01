@@ -130,3 +130,16 @@ def power_set(a, memo=None):
         memo.add(subset_copy)
 
     power_set(a, memo)
+
+#Problem 8.5
+#wrtie a recursive function to multiply two positive integers without using
+#the * operator. You can use addition, subtraction, and bit shifting, but you
+#should minimize the number of those operations.
+def recursive_multiply(a, b):
+    if a == 0 or b == 0:
+        return a
+    else:
+        return a + recursive_multiply(a, b-1)
+
+
+
