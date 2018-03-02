@@ -169,7 +169,13 @@ def recursive_multiply2(a, b):
 #(2) A disk is slid off the top of one tower onto another tower.
 #(3) A disk cannot be placed on top of a smaller disk.
 #Write a program to move the disks from the first tower to the last using stacks.
-def towers_of_hanoi(a, b, c):
+def towers_of_hanoi(n, a, b, c):
+    if n <= 0:
+        return
+
+    towers_of_hanoi(n-1, a, c, b)
+    c.push(a.pop())
+    towers_of_hanoi(n-1, b, c, a)
 
 
 
