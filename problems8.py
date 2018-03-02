@@ -177,19 +177,16 @@ def towers_of_hanoi(n, a, b, c):
     c.push(a.pop())
     towers_of_hanoi(n-1, b, c, a)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#Problem 8.7
+#Write a method to compute all permutations of a string of unique characters.
+def perm_without_dups(s, perms=None):
+    if len(s) == 0:
+        return []
+    else:
+        char = s.pop()
+        prefix = perm_without_dups(s, perms)
+        perms = []
+        for p in prefix:
+            for i in range(len(p)):
+                new_perm = p[:i] + char + p[i:]
+                perms.append(new_perm)
