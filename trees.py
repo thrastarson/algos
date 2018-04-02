@@ -18,7 +18,7 @@ class BinaryTreeNode:
 
 def bst_insert(root, node):
     if root is None:
-        root = None
+        root = node
     else:
         if node.data <= root.data:
             if root.left is None:
