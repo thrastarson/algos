@@ -303,3 +303,32 @@ class AnimalShelter:
             return self.cat_queue.remove()
         else:
             return self.dog_queue.remove()
+
+#Extra problem.
+#Given a string of opening and closing brackets, test if the
+#brackets are balanced or not.
+def is_matched(expression):
+    if expression is None:
+        return True
+    
+    if len(expression) % 2 == 1:
+        return False
+    
+    stack = []
+    starting = '{[('
+    closing = '}])'
+    matching = {i: j for i, j in zip(closing, starting)}
+    for x in expression:
+        if x in starting:
+            stack.append(x)
+        elif x in closing:
+            if len(stack) == 0:
+                return False
+            popped = stack.pop()
+            if matching[x] != popped:
+                return False
+    
+    if len(stack) == 0:
+        return True
+    else:
+        return False
