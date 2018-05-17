@@ -107,7 +107,8 @@ def urlify2(w, length):
         if c == ' ':
             chars.append('%20')        
         else:
-            chars.append(' ')
+            chars.append(c)
+        i += 1
     url_w = build_string(chars)
     return url_w
 
