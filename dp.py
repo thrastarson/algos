@@ -103,6 +103,7 @@ def longest_common_subsequence(a, b):
     return memo[n][m]
 
 """
+Minimum Edit Distance
 Given two strings a and b and the operations insert, remove, replace,
 find the minimum number of edits required to convert a into b.
 All of the operations are of equal cost.
@@ -130,6 +131,32 @@ def minimum_edit_distance(a, b):
     m = len(b)
     return memo[n][m]
 
+"""
+Subset Sum Problem
+Given a set of non-negative integers a, and a value s, 
+determine if there is a subset of a with sum equal to s.
+"""
+def has_subset_sum_rec(a, s):
+    """
+    Recursive solution. Running time is O(2^n).
+    """
+    if s == 0:
+        return True
+
+    if len(a) == 0 and s > 0:
+        return False
+
+    if a[-1] > s:
+        #If last element is greater than s,
+        #we can ignore it.
+        return has_subset_sum_rect(a[:-1], s)
+    else:
+        #Check both remaining possibilities:
+        #   a) exclude the last element, search for subset in prefix
+        #   b) include the last element, search for remainder of s
+        #      in prefix
+        return (has_subset_sum_rec(a[:-1], s) 
+                or has_subset_sum_rec(a[:-1], s - a[-1]))
 
 if __name__ == '__main__':
     a = [3, 10, 3, 11, 4, 5, 6, 7, 8, 12]
@@ -170,3 +197,10 @@ if __name__ == '__main__':
     b = 'execution'
     print(a, b)
     print(minimum_edit_distance(a, b))
+
+    a = [3, 34, 4, 12, 5, 2]
+    s = 9
+    print('Subset sum problem:')
+    print('Recursive:')
+    print(a, s)
+    print(has_subset_sum_rec(a, s))
