@@ -26,6 +26,37 @@ def longest_increasing_subsequence(a):
 
     return max(memo)
 
+"""
+Prefix sum of Matrix.
+Given a matrix (or 2D array) a[][] of integers, find the prefix sum matrix for it. 
+Let the prefix sum matrix be psa[][]. The value of psa[i][j] contains the sum 
+of all values which are above it or on left of it.
+
+a = [[10, 20, 30],  psa = [[10, 30,  60],
+     [ 5, 10, 20],         [15, 45,  95],
+     [ 2,  4,  6]]         [17, 51, 107]]
+"""
+def prefix_sum_of_matrix(a):
+    psa = [[0 for col in a] for row in a]
+    
+    for i, row in enumerate(a):
+        for j, el in enumerate(row):
+            if i == 0 and j == 0:
+                psa[i][j] = a[i][j]
+            elif i == 0:
+                psa[i][j] = a[i][j] + psa[i][j-1]
+            elif j == 0:
+                psa[i][j] = a[i][j] + psa[i-1][j]
+            else:
+                psa[i][j] = a[i][j] + psa[i-1][j] + psa[i][j-1] - psa[i-1][j-1]
+
+    return psa
+
 if __name__ == '__main__':
     a = [3, 10, 3, 11, 4, 5, 6, 7, 8, 12]
     print(longest_increasing_subsequence(a))
+
+    a = [[10, 20, 30],
+         [5, 10, 20],
+         [2, 4, 6]]
+    print(prefix_sum_of_matrix(a))
