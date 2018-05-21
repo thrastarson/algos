@@ -46,8 +46,8 @@ def longest_increasing_subsequence(a):
     memo = [0 for _ in a]
     for i in range(len(a)):
         prefix_path = [path for j, path in enumerate(memo[:i]) if a[j] < a[i]]
-        if len(prefix_sequence_lengths) > 0:
-            memo[i] = max(prefix_sequence_lengths) + 1
+        if len(prefix_path) > 0:
+            memo[i] = max(prefix_path) + 1
         else:
             memo[i] = 1
 
@@ -81,6 +81,27 @@ def prefix_sum_of_matrix(a):
 
     return psa
 
+"""
+Longest Common Subsequence
+Given two sequences a and b, find the length of the longest subsequence 
+present in both of them. A subsequence is a sequence that appears 
+in the same relative order, but not necessarily contiguous. 
+For example, “abc”, “abg”, “bdf”, “aeg”, ‘”acefg”, .. etc 
+are subsequences of “abcdefg”. 
+So a string of length n has 2^n different possible subsequences.
+"""
+def longest_common_subsequence(a, b):
+    memo = [[0 for _ in range(len(b) + 1)] for _ in range(len(a) + 1)]
+    for i in range(len(a)):
+        for j in range(len(b)):
+            if a[i] == b[j]:
+                memo[i+1][j+1] = memo[i][j] + 1
+            else:
+                memo[i+1][j+1] = max(memo[i][j+1], memo[i+1][j])
+    n = len(a)
+    m = len(b)
+    return memo[n][m]
+
 if __name__ == '__main__':
     a = [3, 10, 3, 11, 4, 5, 6, 7, 8, 12]
     print(longest_increasing_subsequence_by_one(a))
@@ -92,3 +113,11 @@ if __name__ == '__main__':
 
     a = [10, 22, 9, 33, 21, 50, 41, 60, 80]
     print(longest_increasing_subsequence(a))
+
+    a = 'ABCDGH'
+    b = 'AEDFHR'
+    print(longest_common_subsequence(a, b))
+
+    a = 'AGGTAB'
+    b = 'GXTXAYB'
+    print(longest_common_subsequence(a, b))
