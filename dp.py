@@ -102,22 +102,71 @@ def longest_common_subsequence(a, b):
     m = len(b)
     return memo[n][m]
 
+"""
+Given two strings a and b and the operations insert, remove, replace,
+find the minimum number of edits required to convert a into b.
+All of the operations are of equal cost.
+"""
+def minimum_edit_distance(a, b):
+    memo = [[0 for _ in range(len(b) + 1)] for _ in range(len(a) + 1)]
+    for i in range(len(a) + 1):
+        for j in range(len(b) + 1):
+            if i == 0:
+                #If a is empty, the only option is to insert
+                #all characters of b.
+                memo[i][j] = j
+            elif j == 0:
+                #if b is empty, the only option is to delete
+                #all characters from a.
+                memo[i][j] = i
+            elif a[i-1] == b[j-1]:
+                memo[i][j] = memo[i-1][j-1]
+            else:
+                memo[i][j] = 1 + min(memo[i][j-1],     #Insert
+                                     memo[i-1][j],     #Delete
+                                     memo[i-1][j-1])     #Replace
+    
+    n = len(a)
+    m = len(b)
+    return memo[n][m]
+
+
 if __name__ == '__main__':
     a = [3, 10, 3, 11, 4, 5, 6, 7, 8, 12]
+    print('Longest increasing subsequence by one:')
+    print(a)
     print(longest_increasing_subsequence_by_one(a))
 
     a = [[10, 20, 30],
          [5, 10, 20],
          [2, 4, 6]]
+    print('Prefix sum of a matrix:')
+    print(a)
     print(prefix_sum_of_matrix(a))
 
     a = [10, 22, 9, 33, 21, 50, 41, 60, 80]
+    print('Longest increasing subsequence:')
+    print(a)
     print(longest_increasing_subsequence(a))
 
     a = 'ABCDGH'
     b = 'AEDFHR'
+    print('Longest common subsequence:')
+    print(a, b)
     print(longest_common_subsequence(a, b))
 
     a = 'AGGTAB'
     b = 'GXTXAYB'
+    print(a, b)
     print(longest_common_subsequence(a, b))
+
+    a = 'sunday'
+    b = 'saturday'
+    print('Minimum edit distance:')
+    print(a, b)
+    print(minimum_edit_distance(a, b))
+
+    a = 'intention'
+    b = 'execution'
+    print(a, b)
+    print(minimum_edit_distance(a, b))
