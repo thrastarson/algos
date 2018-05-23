@@ -158,6 +158,99 @@ def has_subset_sum_rec(a, s):
         return (has_subset_sum_rec(a[:-1], s) 
                 or has_subset_sum_rec(a[:-1], s - a[-1]))
 
+
+def has_subset_sum(a, s):
+    n = len(a)
+    memo = [[False for _ in range(s + 1)] for _ in n + 1]
+    
+    #The value of memo[i][j] is True if there is a subset
+    #of a[0..i-1] with sum equal to j.
+    
+    for i in range(n + 1):
+        #For every set there is a subset with the sum 0,
+        #namely the empty set.
+        memo[i][0] = True
+
+    for j in range(1, s + 1):
+        #For every value of sum there is no way
+        #to reach it with an empty set.
+        memo[0][j] = False
+
+    for i in range(1, n + 1):
+        for j in range(1, s + 1):
+            if a[i] > j:
+                #If element a[i] is greater than the sum j,
+                #we cannot use element a[i] in the sum.
+                memo[i][j] = memo[i-1][j]
+            else:
+                #Two cases:
+                # a) Create sum j from subset a[0..i-1] with element a[i].
+                # b) Create sum j from subset a[0..i-1] without element a[i]
+                memo[i][j] = memo[i-1][j - a[i]] or memo[i-1][j]
+
+    return a[n][s]
+
+"""
+Minimum Set Partition Problem
+Given a set of integers a, the task is to divide it into two sets b and c 
+such that the absolute difference between their sums is minimum.
+
+We want to minimize abs(sum(b) - sum(c)).
+Example:
+    a = [1, 6, 11, 5]
+    Output: 1
+    because b = [1, 5, 6], c = [11] 
+    and abs(sum(a) - sum(b)) = abs(12 - 11) = 1.
+"""
+def min_set_partition(a):
+    """
+    sum_calc is the sum of the first subset partition.
+    sum_total is the sum of all elements in a.
+    """
+    n = len(a)
+    sum_calc = 0
+    sum_total = sum(a)
+    return min_set_partition_rec(a, n, sum_calc, sum_total)
+
+def min_set_partition_rec(a, i, sum_calc, sum_total):
+    if i == 0:
+        #If we have reached the last element,
+        #sum of one subset is sum_calc,
+        #sum of the other subset is sum_total - sum_calc.
+        #Return absolute difference between partitions.
+        return abs(sum_total - (sum_total - sum_calc))
+
+    #For every element a[i], we have two choices:
+    # a) do not include element in the first set
+    # b) include element in the first set
+    #We return the minimum of those choices.
+    return min(min_set_partition(a, i-1, sum_calc, sum_total),
+               min_set_partition(a, i-1, sum_calc + a[i], sum_total))
+
+def min_set_partition_dp(a):
+    sum_total = sum(a)
+    n = len(a)
+    
+    memo = [[j for j in range(sum_total + 1)] for i in n]
+    for i in range(n + 1):
+        for j in range(sum_total + 1):
+            if j == 0:
+                #Initialize first column as True
+                #sum = 0 is possible for all elements.
+                memo[i][j] = True
+            elif i == 0:
+                #Initialize top row, except memo[0][0] as False.
+                #With 0 elements, no other sum except 0 is possible.
+            elif:
+                #If ith element is excluded.
+                memo[i][j] = memo[i-1][j]
+
+                if a[i-1] <= j:
+                    memo[i][j] = memo[i][j] or memo[i-1][j - a[i-1]]
+
+
+
+
 if __name__ == '__main__':
     a = [3, 10, 3, 11, 4, 5, 6, 7, 8, 12]
     print('Longest increasing subsequence by one:')
