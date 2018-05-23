@@ -159,22 +159,44 @@ def validate_bst(root):
         validate_bst(root.right)
     return True
 
+def check_bst(root, min_val=None, max_val=None):
+    if root is None:
+        return True
+
+    if ((min_val is not None and root.data <= min_val) 
+        or (max_val is not None and root.data > max_val)):
+        return False
+
+    if (not check_bst(root.left, max_val=root.data)
+            or not check_bst(root.right, min_val=root.data)):
+        return False
+
+    return True
+
 #Problem 4.6
 #Write an algorithm to find the 'next' node (i.e. in-order successor)
 #of a given node in a binary search tree. You may assume that each
 #node has a link to its parent.
 def successor(node):
     if node is None:
-        return Node
+        return None
 
-    if node.right is None:
-        return node.parent
-
-    curr_node = node.right
-    while curr_node.left is not None:
-        curr_node = curr_node.left
-
-    return curr_node
+    if node.right is not None:
+        #Get the leftmost node in node's right subtree.
+	curr_node = node.right
+        while curr_node.left is not None:
+            curr_node = curr_node.left
+        return curr_node
+    else:
+	#While curr_node is the right child of its parent,
+        #and its parent is not None, keep moving up the tree.
+        #This is because the parent has already been traversed.
+        #We find the first parent (or None) that is the parent of
+        #a left child and has thus not been traversed inorder.
+        curr_node = node
+        while curr_node.parent is not None and curr_node == curr_node.parent.right:
+            curr_node = curr_node.parent
+        return curr_node.parent
 
 #Problem 4.7
 #You are given a list of projects and a list of dependencies
