@@ -15,7 +15,7 @@ def is_unique(w):
     """
     chars = {}
     for c in w:
-        if c in w:
+        if c in chars:
             return False
         chars[c] = True
     return True
@@ -38,14 +38,14 @@ def is_unique2(w):
     return True
 
 #Problem 1.2
-#Given two strings, write a method to decide if one is a permutiation
+#Given two strings, write a method to decide if one is a permutation
 #of the other.
 def check_permutation(u, v):
     """
     First solution uses a handy function from the itertools library.
     Runs in O(n!) worst-case time.
     """
-    for permutation in itertools.permutations(v):
+    for permutation in itertools.permutations(u):
         if v == permutation:
             return True
     return False
