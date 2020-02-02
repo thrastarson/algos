@@ -3,8 +3,8 @@ import random
 def sort_string(w):
     return ''.join(sorted(w))
 
-def get_random_list(size=10):
-    return [random.randint(0, 100) for i in range(size)]
+def get_random_list(size=10, max_int=100):
+    return [random.randint(0, max_int) for i in range(size)]
 
 def is_sorted(a):
     return a == sorted(a)

@@ -39,6 +39,22 @@ def triple_step2(n, memo=None):
                    triple_step2(n-3, memo))
         return memo[n]
 
+def triple_step3(n, memo=None):
+    """
+    Same solution as above, only bottom-up.
+    """
+    if memo is None:
+        memo = {}
+
+    memo[0] = 1
+    memo[1] = 1
+    memo[2] = 3
+
+    for i in range(3, n + 1):
+        memo[i] = memo[i-1] + memo[i-2] + memo[i-3]
+
+    return memo[i]
+
 #Problem 8.2
 #Imagine a robot sitting on the upper left corner of grid with r rows
 #and c columns. The robot can only move in two directions, right and down,
