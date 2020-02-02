@@ -39,7 +39,7 @@ def triple_step2(n, memo=None):
                    triple_step2(n-3, memo))
         return memo[n]
 
-def triple_step3(n, memo=None):
+def triple_step3(n):
     """
     Same solution as above, only bottom-up.
     """
