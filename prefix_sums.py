@@ -29,10 +29,18 @@ def count_total(P, x, y):
 # she visits. The goal is to calculate the maximum number of mushrooms that the mushroom
 # picker can collect in m moves.
 def pick_mushrooms(A, k, m):
+    # Solution O(n + m). 
+    # If we make p moves in one direction, we can calculate the maximal 
+    # opposite location of the mushroom picker. 
+    # The mushroom picker collects all mushrooms between these extremes. 
+    # We can calculate the total number of collected mushrooms in constant time 
+    # by using prefix sums.
     n = len(A)
     result = 0
     pref = prefix_sums(A)
 
+    # m is # of moves allowed
+    # k is starting position of mushroom picker
     for p in range(min(m, k) + 1):
         left_pos = k - p
         right_pos = min(n - 1, max(k, k + m - 2 * p))
