@@ -19,7 +19,7 @@ class LinkedList:
         node._next = self.head
         self.head = node
 
-    def insert_last(data):
+    def insert_last(self, data):
         node = Node(data)
         curr = self.head
         while curr._next is not None:
