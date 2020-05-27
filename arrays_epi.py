@@ -17,26 +17,77 @@ def even_odd(a):
 #and rearrange the elements such that all elements less than a[i]
 #(the pivot) appear first, followed by elements equal to the pivot,
 #followed by elements greater than the pivot.
-def dutch_flag_partition1(a, i):
+def dutch_flag_partition1(A, i):
     """
     O(n) time, O(n) space.
     """
     less = []
     equal = []
     greater = []
-    for x in a:
-        if x < a[i]:
+    for x in A:
+        if x < A[i]:
             less.append(x)
-        elif x == a[i]:
+        elif x == A[i]:
             equal.append(x)
         else:
             greater.append(x)
 
     return less + equal + greater
 
+def dutch_flag_partition2(A, pivot_index):
+    """
+    O(n) time, O(1) space.
+    """
+    pivot = A[pivot_index]
+    smaller = 0
+    for i in range(len(A)):
+        #Move all elements smaller than pivot to the front.
+        if A[i] < pivot:
+            A[smaller], A[i] = A[i], A[smaller]
+            smaller += 1
+    
+    larger = len(A) - 1
+    for j in reversed(range(len(A))):
+        #Move all elements larger than pivot to the back.
+        if A[j] > pivot:
+            A[larger], A[j] = A[j], A[larger]
+            larger -= 1
+    
+    #Now all elements equal to pivot are trivially in the middle.
+
+def dutch_flag_partition3(A, pivot_index):
+    """
+    O(n) time, O(1) space.
+    """
+    smaller, equal, bigger = 0, 0, len(A)-1
+    pivot = A[pivot_index]
+
+    while equal < bigger:
+        #A[equal] is the incoming unclassified element
+        if A[equal] < pivot:
+            A[smaller], A[equal] = A[equal], A[smaller]
+            smaller += 1 
+            equal += 1
+        elif A[equal] == pivot:
+            equal += 1
+        else:
+            A[bigger], A[equal] = A[equal], A[bigger]
+            bigger -= 1
+
+
 if __name__ == '__main__':
-    a = get_random_list(size=8, max_int=6)
+    A = get_random_list(size=8, max_int=6)
     i = 2
-    print(a, a[i])
-    a_part = dutch_flag_partition1(a, i)
-    print(a_part)
+    print(A, A[i])
+    A_part = dutch_flag_partition1(A, i)
+    print(A_part)
+
+    A = get_random_list(size=8, max_int=6)
+    print(A, A[i])
+    dutch_flag_partition2(A, i)
+    print(A)
+
+    A = get_random_list(size=8, max_int=6)
+    print(A, A[i])
+    dutch_flag_partition3(A, i)
+    print(A)
