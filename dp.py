@@ -249,6 +249,57 @@ def min_set_partition_dp(a):
                     memo[i][j] = memo[i][j] or memo[i-1][j - a[i-1]]
 
 
+def cut_rod(price, n):
+    # Rod-cutting problem. O(2^n).
+    # cut_rod takes as input a list of prices and an integer n,
+    # and returns the maximum revenue possible for a rod of length n.
+    if n <= 0:
+        return 0
+    
+    profit = float('-inf')
+    # Recursively cut the rod in different pieces   
+    # and compare different configurations 
+    for i in range(n):
+        profit = max(profit, price[i] + cut_rod(price, n - i - 1))
+
+    return profit
+
+def cut_rod_dp1(price, n):
+    memo = {}
+    return cut_rod_dp1_helper(price, n, memo)
+
+def cut_rod_dp1_helper(price, n, memo):
+    try:
+        return memo[n]
+    except KeyError:
+        pass
+    
+    if n <= 0:
+        return 0
+    
+    profit = float('-inf')
+    for i in range(n):
+        profit = max(profit, price[i] + cut_rod_dp1_helper(price, n - i - 1, memo))
+    
+    memo[n] = profit    
+    return profit
+
+def cut_rod_dp2(price, n):
+    #memo[j] stores the max profit for a rod of length j.
+    memo = {}
+    memo[0] = 0
+    for j in range(1, n):
+        profit = float('-inf')
+        for i in range(j):
+            profit = max(profit, price[i] + memo[j - i - 1])
+        memo[j] = profit
+    return memo[n-1]
+
+
+
+
+
+
 
 
 if __name__ == '__main__':
