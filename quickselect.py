@@ -43,4 +43,4 @@ def partition(A, left, right, pivot_index):
     return result_index
 
 def swap(A, i, j):
-    A[i], A[j] = A[j], A[j]
+    A[i], A[j] = A[j], A[i]
