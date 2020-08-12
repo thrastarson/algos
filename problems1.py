@@ -165,9 +165,8 @@ def one_away(u, v):
         return False
 
     if len(u) < len(v):
-        temp = v
-        v = u
-        u = temp
+        #set u to be the longer string
+        v, u = u, v
 
     found_edit = False
     i = 0
@@ -227,7 +226,7 @@ def string_compression(w):
 
 #Problem 1.7
 #Given an image represented by an NxN matrix, where each pixel
-#in the image is 4 bytes, write a mehtod to rotate the image
+#in the image is 4 bytes, write a method to rotate the image
 #by 90 degrees. Can you do this in place?
 def rotate_matrix(matrix):
     """

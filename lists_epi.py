@@ -59,3 +59,4 @@ def reverse_sublist(l, start, finish):
         prev = prev.next
         sublist = temp
 
+    return l

@@ -98,12 +98,18 @@ def kth_to_last(li, k):
 
     curr = li.head
     count = 1
-    while curr is not None:
-        if count == k:
-            return curr
+    while count < k:
         curr = curr._next
         count += 1
-    return False
+    #Now curr is the kth element.
+
+    front = curr
+    back = li.head
+    while front is not None:
+        front = front._next
+        back = back._next
+    
+    return back
 
 #Problem 2.3
 #Implement an algorithm to delete the node in the middle (i.e. any node but the
