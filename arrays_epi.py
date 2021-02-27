@@ -74,6 +74,53 @@ def dutch_flag_partition3(A, pivot_index):
             A[bigger], A[equal] = A[equal], A[bigger]
             bigger -= 1
 
+#Increment an arbitrary-precision integer. Takes as input an array of digits encoding a nonnegative decimal integer D
+#and updates the array to represent the integer D+1.
+def plus_one(A):
+    A[-1] += 1
+    for i in reversed(range(1, len(A))):
+        if A[i] != 10:
+            break
+
+        A[i] = 0
+        A[i-1] += 1
+    
+    if A[0] == 10:
+        A.append(0)
+        A[0] = 1
+    
+    return A
+
+#Write a program that takes two arrays representing integers,
+#and returns an integer that represents their product.
+def multiply(num1, num2):
+    if len(num2) > len(num1):
+        num1, num2 = num2, num1
+
+    sign = 1 if num1[0] * num[2] > 0 else -1
+
+    num3 = [0] * (len(num1) + len(num2))
+    carry = 0
+    for i in reversed(range(len(num1))):
+        for j in reversed(range(len(num2))):
+            num3[i + j + 1] += num1[i] * num2[j]
+            result[i + j] += result[i + j + 1] // 10
+            result[i + j + 1] %= 10 
+
+    #remove the leading zeroes.
+    k = 0
+    while num3[k] == 0:
+        k += 1
+    
+    num3 = num3[k:]
+    num3[0] *= sign
+    return num3
+
+
+
+        
+
+
 
 if __name__ == '__main__':
     A = get_random_list(size=8, max_int=6)
