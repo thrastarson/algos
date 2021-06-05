@@ -1,4 +1,5 @@
 from utils import get_random_list
+import math
 
 #The input is a list of integers. Reorder its entries
 #so that the even entries appear first.
@@ -117,10 +118,29 @@ def multiply(num1, num2):
     return num3
 
 
+def sudoku_checker(board):
 
-        
+    def is_valid_line(line):
+        valid_entry = lambda x: x > 0 < 10
+        line = list(filter(valid_entry, line))
+        contains_no_duplicates = len(line) == len(set(line))
+        return contains_no_duplicates
 
-
+    n = len(board)
+    for i in range(n):
+        row = [board[i][j] for j in range(n)]
+        column = [board[j][i] for j in range(n)]
+        if not is_valid_line(row) or not is_valid_line(column):
+            return False
+    
+    for i in range(0, n, 3):
+        for j in range(0, n, 3):
+            line = [board[r][s] for r in range(i, i + 3)
+                                for s in range(j, j + 3)]
+            if not is_valid_line(line):
+                return False
+    
+    return True
 
 if __name__ == '__main__':
     A = get_random_list(size=8, max_int=6)
@@ -138,3 +158,42 @@ if __name__ == '__main__':
     print(A, A[i])
     dutch_flag_partition3(A, i)
     print(A)
+    print('\n')
+
+    board = [[5, 3, 0, 0, 7, 0, 0, 0, 0],
+             [6, 0, 0, 1, 9, 5, 0, 0, 0],
+             [0, 9, 8, 0, 0, 0, 0, 6, 0],
+             [8, 0, 0, 0, 6, 0, 0, 0, 3],
+             [4, 0, 0, 8, 0, 3, 0, 0, 1],
+             [7, 0, 0, 0, 2, 0, 0, 0, 6],
+             [0, 6, 0, 0, 0, 0, 2, 8, 0],
+             [0, 0, 0, 4, 1, 9, 0, 0, 5],
+             [0, 0, 0, 0, 8, 0, 0, 7, 9]]
+    is_valid = sudoku_checker(board)
+    print(is_valid)
+
+
+    board = [[5, 0, 0, 0, 7, 0, 0, 0, 0],
+             [6, 0, 0, 1, 9, 5, 0, 0, 0],
+             [0, 9, 8, 0, 0, 0, 0, 6, 0],
+             [8, 0, 0, 0, 6, 0, 0, 0, 3],
+             [4, 0, 0, 8, 0, 3, 0, 0, 1],
+             [7, 0, 0, 0, 0, 0, 0, 0, 6],
+             [0, 6, 0, 0, 0, 0, 2, 8, 0],
+             [0, 0, 0, 4, 1, 9, 0, 0, 5],
+             [0, 0, 0, 0, 8, 0, 0, 7, 9]]
+    is_valid = sudoku_checker(board)
+    print(is_valid)
+
+    board = [[5, 0, 9, 0, 7, 0, 0, 0, 0],
+             [6, 0, 0, 1, 9, 5, 0, 0, 0],
+             [0, 9, 8, 0, 0, 0, 0, 6, 0],
+             [8, 0, 0, 0, 6, 0, 0, 0, 3],
+             [4, 0, 0, 8, 0, 3, 0, 0, 1],
+             [7, 0, 0, 0, 0, 0, 0, 0, 6],
+             [0, 6, 0, 0, 0, 0, 2, 8, 0],
+             [0, 0, 0, 4, 1, 9, 0, 0, 5],
+             [0, 0, 0, 0, 8, 0, 0, 7, 9]]
+    is_valid = sudoku_checker(board)
+    print(is_valid)
+
