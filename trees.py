@@ -97,3 +97,19 @@ def visible_tree_node(root: BinaryTreeNode) -> int:
         return total
     
     return dfs(root, root.val) if root else 0
+
+def is_balanced(tree: BinaryTreeNode) -> bool:
+    def tree_height(tree: BinaryTreeNode) -> int:
+        if tree is None:
+            return 0
+        
+        left_height = tree_height(tree.left)
+        right_height = tree_height(tree.right)
+        if left_height == -1 or right_height == -1:
+            return -1
+        elif abs(left_height - right_height) > 1:
+            return -1
+        else:
+            return 1 + max(left_height, right_height)
+    
+    return tree_height(tree) != -1
