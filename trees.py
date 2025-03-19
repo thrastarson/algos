@@ -57,3 +57,19 @@ def postorder_traversal(node, foo):
         postorder_traversal(node.left, visit)
         postorder_traversal(node.right, visit)
         visit(node)
+
+def max_depth(node):
+    """
+    Max depth of a binary tree is the longest root-to-leaf path. 
+    Given a binary tree, find its max depth.
+    Here, we define the length of the path to be the number of edges on that path, not the number of nodes.
+    """
+    def dfs(node):
+        """
+        Use DFS to calculate the number of nodes on the longest path from root to leaf.
+        """
+        if node is None:
+            return 0
+        return 1 + max(dfs(node.left), dfs(node.right))
+    
+    return dfs(node) - 1 if node else 0
