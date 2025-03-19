@@ -73,3 +73,27 @@ def max_depth(node):
         return 1 + max(dfs(node.left), dfs(node.right))
     
     return dfs(node) - 1 if node else 0
+
+def visible_tree_node(root: BinaryTreeNode) -> int:
+    """
+    In a binary tree, a node is labeled as "visible" if, 
+    on the path from the root to that node, 
+    there isn't any node with a value higher than this node's value.
+    The root is always "visible" since there are no other nodes 
+    between the root and itself. 
+    Given a binary tree, count the number of "visible" nodes.
+    """
+    def dfs(root: BinaryTreeNode, max_element: int) -> int:
+        if root is None:
+            return 0
+    
+        total = 0
+        if root.val >= max_element:
+            total += 1
+
+        total += dfs(root.left, max(root.val, max_element))
+        total += dfs(root.right, max(root.val, max_element))
+        
+        return total
+    
+    return dfs(root, root.val) if root else 0
