@@ -113,3 +113,18 @@ def is_balanced(tree: BinaryTreeNode) -> bool:
             return 1 + max(left_height, right_height)
     
     return tree_height(tree) != -1
+
+def invert_binary_tree(tree: BinaryTreeNode) -> BinaryTreeNode:
+    """
+    Given a binary tree, invert it and return the new value. You may invert it in-place.
+    To "invert" a binary tree, switch the left subtree and the right subtree, and invert them both. Inverting an empty tree does nothing.
+    """
+    if tree is None:
+        return tree
+    
+    left_inverted = invert_binary_tree(tree.left)
+    right_inverted = invert_binary_tree(tree.right)
+
+    tree.left, tree.right = tree.right, tree.left
+
+    return tree
