@@ -1,3 +1,5 @@
+import math
+
 """
 Longest increasing subsequence by one
 Given N elements, write a program that prints the length of the longest increasing
@@ -149,7 +151,7 @@ def has_subset_sum_rec(a, s):
     if a[-1] > s:
         #If last element is greater than s,
         #we can ignore it.
-        return has_subset_sum_rect(a[:-1], s)
+        return has_subset_sum_rec(a[:-1], s)
     else:
         #Check both remaining possibilities:
         #   a) exclude the last element, search for subset in prefix
@@ -241,7 +243,8 @@ def min_set_partition_dp(a):
             elif i == 0:
                 #Initialize top row, except memo[0][0] as False.
                 #With 0 elements, no other sum except 0 is possible.
-            elif:
+                continue
+            else:
                 #If ith element is excluded.
                 memo[i][j] = memo[i-1][j]
 
@@ -296,6 +299,48 @@ def cut_rod_dp2(price, n):
     return memo[n-1]
 
 
+"""
+The problem is centered around a given string s and the goal is to partition the string in such a way 
+that each substring of the partition is a palindrome. 
+A palindrome is defined as a string that reads the same forward and backward.
+The main objective here is to find the minimum number of cuts necessary 
+to achieve this partitioning. 
+A cut defines a division between two characters in the string, 
+creating separate substrings that must all be palindromes.
+For example, if s is "aab", a partition like "aa"|"b" is valid, 
+as both "aa" and "b" are palindromes. 
+The minimum number of cuts in this example is 1.
+"""
+def min_palindrome_partitioning(s):
+    n = len(s)
+    is_palindrome = [[False for _ in range(n)] for _ in range(n)]
+
+    for i in range(n):
+        is_palindrome[i][i] = True
+    
+    for start in range(n - 1, -1, -1):
+        # Iterate backwards and expand start on each iteration.
+        for end in range(start + 1, n):
+            # Try longer substrings to the right.
+            if s[start] == s[end]:
+                if end - start == 1:
+                    # Strings of length 2 are palindromes if they match.
+                    is_palindrome[start][end] = True
+                else:
+                    is_palindrome[start][end] = is_palindrome[start + 1][end - 1]
+
+
+    cuts = [math.inf for _ in range(n)]
+    for i in range(n):
+        for j in range(i + 1):
+            if is_palindrome[j][i]:
+                cuts[i] = min(cuts[i], 0 if j == 0 else 1 + cuts[j - 1])
+
+    return cuts[-1]
+
+
+
+
 
 
 
@@ -348,3 +393,8 @@ if __name__ == '__main__':
     print('Recursive:')
     print(a, s)
     print(has_subset_sum_rec(a, s))
+
+    s = "abdbca"
+    print("Min Palindrome Partitioning")
+    print(min_palindrome_partitioning(s))
+    assert(min_palindrome_partitioning(s) == 3)
